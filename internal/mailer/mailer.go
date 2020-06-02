@@ -8,13 +8,13 @@ import (
 	"google.golang.org/grpc/status"
 )
 
-// MessageDeliverer describes the functions to deliver application specific messages.
-type MessageDeliverer interface {
+// Messenger describes the functions to deliver application specific messages.
+type Messenger interface {
 	SendConfirmToken(user *store.User) error
 	SendPasswordResetToken(user *store.User) error
 }
 
-// Mailer implements the MessageDeliverer interface.
+// Mailer implements the Messenger interface.
 type Mailer struct {
 	mailClient       MailClient
 	confirmUrl       string
@@ -23,8 +23,8 @@ type Mailer struct {
 	siteName         string
 }
 
-// ensure Mailer implements the MessageDeliverer interface.
-var _ MessageDeliverer = &Mailer{}
+// ensure Mailer implements the Messenger interface.
+var _ Messenger = &Mailer{}
 
 // NewMailer creates a new mailer and returns the pointer.
 func NewMailer(mailClient MailClient, mailFrom, siteName, confirmUrl, resetPasswordUrl string) (*Mailer, error) {

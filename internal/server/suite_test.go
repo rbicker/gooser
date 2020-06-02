@@ -67,7 +67,7 @@ func (suite *Suite) SetupSuite() {
 	// oauthClient
 	oauth := new(mocks.UserLookup)
 	// mailer
-	mailer := new(mocks.MessageDeliverer)
+	mailer := new(mocks.Messenger)
 	// create test grpc server
 	srv, err := NewServer("secret", db, oauth, mailer, srvOpts...)
 	if err != nil {

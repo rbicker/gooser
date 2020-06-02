@@ -273,7 +273,7 @@ func (suite *Suite) TestCreateUser() {
 	// tests
 	tests := []struct {
 		name          string
-		prepare       func(db *mocks.Store, mailer *mocks.MessageDeliverer)
+		prepare       func(db *mocks.Store, mailer *mocks.Messenger)
 		accessToken   string
 		req           *gooserv1.User
 		wantCode      codes.Code
@@ -351,7 +351,7 @@ func (suite *Suite) TestCreateUser() {
 				Mail:     "new@testing.com",
 				Password: "password1234",
 			},
-			prepare: func(db *mocks.Store, mailer *mocks.MessageDeliverer) {
+			prepare: func(db *mocks.Store, mailer *mocks.Messenger) {
 				db.On("ListUsers", mock.Anything, mock.Anything, `username=="user1",mail=="new@testing.com"`, int32(1), int32(0)).Return(
 					&[]store.User{
 						{
@@ -373,7 +373,7 @@ func (suite *Suite) TestCreateUser() {
 				Mail:     "new@testing.com",
 				Password: "password1234",
 			},
-			prepare: func(db *mocks.Store, mailer *mocks.MessageDeliverer) {
+			prepare: func(db *mocks.Store, mailer *mocks.Messenger) {
 				db.On("ListUsers", mock.Anything, mock.Anything, `username=="new",mail=="new@testing.com"`, int32(1), int32(0)).Return(
 					nil,
 					int32(0),
@@ -401,7 +401,7 @@ func (suite *Suite) TestCreateUser() {
 				Password:  "password1234",
 				Confirmed: true,
 			},
-			prepare: func(db *mocks.Store, mailer *mocks.MessageDeliverer) {
+			prepare: func(db *mocks.Store, mailer *mocks.Messenger) {
 				db.On("ListUsers", mock.Anything, mock.Anything, `username=="new",mail=="new@testing.com"`, int32(1), int32(0)).Return(
 					nil,
 					int32(0),
@@ -424,7 +424,7 @@ func (suite *Suite) TestCreateUser() {
 			assert := assert.New(t)
 			// prepare mock
 			db := new(mocks.Store)
-			mailer := new(mocks.MessageDeliverer)
+			mailer := new(mocks.Messenger)
 			if tt.prepare != nil {
 				tt.prepare(db, mailer)
 			}
@@ -469,7 +469,7 @@ func (suite *Suite) TestUpdateUser() {
 	// tests
 	tests := []struct {
 		name          string
-		prepare       func(db *mocks.Store, mailer *mocks.MessageDeliverer)
+		prepare       func(db *mocks.Store, mailer *mocks.Messenger)
 		accessToken   string
 		req           *gooserv1.UpdateUserRequest
 		wantCode      codes.Code
@@ -546,7 +546,7 @@ func (suite *Suite) TestUpdateUser() {
 					Paths: []string{"username", "mail"},
 				},
 			},
-			prepare: func(db *mocks.Store, mailer *mocks.MessageDeliverer) {
+			prepare: func(db *mocks.Store, mailer *mocks.Messenger) {
 				db.On("GetUser", mock.Anything, mock.Anything, mock.Anything).Return(
 					func(ctx context.Context, printer *message.Printer, id string) *store.User {
 						return &store.User{
@@ -591,7 +591,7 @@ func (suite *Suite) TestUpdateUser() {
 					Paths: []string{"username", "mail"},
 				},
 			},
-			prepare: func(db *mocks.Store, mailer *mocks.MessageDeliverer) {
+			prepare: func(db *mocks.Store, mailer *mocks.Messenger) {
 				db.On("GetUser", mock.Anything, mock.Anything, mock.Anything).Return(
 					func(ctx context.Context, printer *message.Printer, id string) *store.User {
 						return &store.User{
@@ -625,7 +625,7 @@ func (suite *Suite) TestUpdateUser() {
 		{
 			name:        "remove mail address",
 			accessToken: "user1",
-			prepare: func(db *mocks.Store, mailer *mocks.MessageDeliverer) {
+			prepare: func(db *mocks.Store, mailer *mocks.Messenger) {
 				db.On("GetUser", mock.Anything, mock.Anything, mock.Anything).Return(
 					func(ctx context.Context, printer *message.Printer, id string) *store.User {
 						return &store.User{
@@ -652,7 +652,7 @@ func (suite *Suite) TestUpdateUser() {
 		{
 			name:        "remove mail address as admin",
 			accessToken: "admin",
-			prepare: func(db *mocks.Store, mailer *mocks.MessageDeliverer) {
+			prepare: func(db *mocks.Store, mailer *mocks.Messenger) {
 				db.On("GetUser", mock.Anything, mock.Anything, mock.Anything).Return(
 					func(ctx context.Context, printer *message.Printer, id string) *store.User {
 						return &store.User{
@@ -695,7 +695,7 @@ func (suite *Suite) TestUpdateUser() {
 		{
 			name:        "mail or username duplicate",
 			accessToken: "user1",
-			prepare: func(db *mocks.Store, mailer *mocks.MessageDeliverer) {
+			prepare: func(db *mocks.Store, mailer *mocks.Messenger) {
 				db.On("GetUser", mock.Anything, mock.Anything, mock.Anything).Return(
 					func(ctx context.Context, printer *message.Printer, id string) *store.User {
 						return &store.User{
@@ -737,7 +737,7 @@ func (suite *Suite) TestUpdateUser() {
 			assert := assert.New(t)
 			// prepare mock
 			db := new(mocks.Store)
-			mailer := new(mocks.MessageDeliverer)
+			mailer := new(mocks.Messenger)
 			if tt.prepare != nil {
 				tt.prepare(db, mailer)
 			}
@@ -1121,13 +1121,13 @@ func (suite *Suite) TestForgotPassword() {
 	// tests
 	tests := []struct {
 		name     string
-		prepare  func(db *mocks.Store, mailer *mocks.MessageDeliverer)
+		prepare  func(db *mocks.Store, mailer *mocks.Messenger)
 		req      *gooserv1.ForgotPasswordRequest
 		wantCode codes.Code
 	}{
 		{
 			name: "mail not found",
-			prepare: func(db *mocks.Store, mailer *mocks.MessageDeliverer) {
+			prepare: func(db *mocks.Store, mailer *mocks.Messenger) {
 				db.On("GetUserByMail", mock.Anything, mock.Anything, "user1@testing.com").Return(
 					nil,
 					status.Errorf(codes.NotFound, "user not found"),
@@ -1140,7 +1140,7 @@ func (suite *Suite) TestForgotPassword() {
 		},
 		{
 			name: "by username",
-			prepare: func(db *mocks.Store, mailer *mocks.MessageDeliverer) {
+			prepare: func(db *mocks.Store, mailer *mocks.Messenger) {
 				db.On("GetUserByUsername", mock.Anything, mock.Anything, "user1").Return(
 					&store.User{
 						Username: "user1",
@@ -1167,7 +1167,7 @@ func (suite *Suite) TestForgotPassword() {
 			assert := assert.New(t)
 			// prepare mock
 			db := new(mocks.Store)
-			mailer := new(mocks.MessageDeliverer)
+			mailer := new(mocks.Messenger)
 			if tt.prepare != nil {
 				tt.prepare(db, mailer)
 			}

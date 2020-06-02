@@ -40,7 +40,7 @@ type Server struct {
 	secret              string
 	port                string
 	store               store.Store
-	mailer              mailer.MessageDeliverer
+	mailer              mailer.Messenger
 	grpcServer          *grpc.Server
 	useReflection       bool
 	listener            net.Listener
@@ -60,7 +60,7 @@ type PageToken struct {
 var _ gooserv1.GooserServer = &Server{}
 
 // NewServer returns a new gooser server.
-func NewServer(secret string, db store.Store, authClient auth.UserLookup, mailer mailer.MessageDeliverer, opts ...func(*Server) error) (*Server, error) {
+func NewServer(secret string, db store.Store, authClient auth.UserLookup, mailer mailer.Messenger, opts ...func(*Server) error) (*Server, error) {
 	printer := message.NewPrinter(language.English)
 	// create server
 	var srv = Server{
