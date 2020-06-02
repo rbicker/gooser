@@ -1,0 +1,119 @@
+syntax = "proto3";
+
+package gooser.v1;
+
+option go_package = "gooserv1";
+
+
+import "google/protobuf/empty.proto";
+import "google/protobuf/field_mask.proto";
+import "google/protobuf/timestamp.proto";
+
+// Gooser (Go User) is a simple API for managing users.
+service Gooser {
+    // List users.
+    rpc ListUsers(ListRequest) returns (ListUsersResponse){}
+    // Gets a user.
+    rpc GetUser(IdRequest) returns (User) {}
+    // Creates a user.
+    rpc CreateUser(User) returns (User) {}
+    // Updates a user.
+    rpc UpdateUser(UpdateUserRequest) returns (User) {}
+    // Deletes a user.
+    rpc DeleteUser(IdRequest) returns (google.protobuf.Empty) {}
+    // Change password.
+    rpc ChangePassword(ChangePasswordRequest) returns (google.protobuf.Empty) {}
+    // Confirm Mail.
+    rpc ConfirmMail (ConfirmMailRequest) returns (google.protobuf.Empty) {}
+    // Forgot Password.
+    rpc ForgotPassword (ForgotPasswordRequest) returns (google.protobuf.Empty) {}
+    // Reset Password.
+    rpc ResetPassword (ResetPasswordRequest) returns (google.protobuf.Empty) {}
+    // List groups.
+    rpc ListGroups(ListRequest) returns (ListGroupsResponse){}
+    // Gets a group.
+    rpc GetGroup(IdRequest) returns (Group) {}
+    // Creates a group.
+    rpc CreateGroup(Group) returns (Group) {}
+    // Updates a group.
+    rpc UpdateGroup(UpdateGroupRequest) returns (Group) {}
+    // Deletes a group.
+    rpc DeleteGroup(IdRequest) returns (google.protobuf.Empty) {}
+}
+
+// generic request containing just an id.
+message IdRequest {
+    string id = 1;
+}
+
+// generic list request.
+message ListRequest{
+    int32 page_size = 1;
+    string page_token = 2;
+    string filter = 3;
+}
+
+message User {
+    string id = 1;
+    google.protobuf.Timestamp created_at = 2;
+    google.protobuf.Timestamp updated_at = 3;
+    string username = 4;
+    string mail = 5;
+    string language = 6;
+    string password = 7;
+    bool confirmed = 8;
+    repeated string roles = 9;
+}
+
+message UpdateUserRequest{
+    User user = 1;
+    google.protobuf.FieldMask field_mask = 2;
+}
+
+message ListUsersResponse {
+    repeated User users = 1;
+    string next_page_token = 2;
+    int32 page_size = 3;
+    int32 total_size = 4;
+}
+
+message ChangePasswordRequest {
+    string id = 1;
+    string old_password = 2;
+    string new_password = 3;
+}
+
+message ConfirmMailRequest {
+    string token = 1;
+}
+
+message ForgotPasswordRequest {
+    string username = 1;
+    string mail = 2;
+}
+
+message ResetPasswordRequest {
+    string token = 1;
+    string password = 2;
+}
+
+message Group {
+    string id = 1;
+    google.protobuf.Timestamp created_at = 2;
+    google.protobuf.Timestamp updated_at = 3;
+    string name = 4;
+    repeated string roles = 5;
+    repeated string members = 6;
+}
+
+message UpdateGroupRequest{
+    Group group = 1;
+    google.protobuf.FieldMask field_mask = 2;
+}
+
+message ListGroupsResponse {
+    repeated Group groups = 1;
+    string next_page_token = 2;
+    int32 page_size = 3;
+    int32 total_size = 4;
+}
