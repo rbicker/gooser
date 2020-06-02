@@ -16,7 +16,7 @@ WORKDIR $GOPATH/src/github.com/rbicker/gooser
 COPY . .
 RUN go mod download
 RUN go mod verify
-RUN go test ./...
+RUN CGO_ENABLED=0 go test ./...
 RUN CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -o /go/bin/gooser-server ./cmd/gooser-server
 
 # ---
