@@ -7,11 +7,11 @@ import (
 	"os/signal"
 	"syscall"
 
-	"github.com/rbicker/gooser/internal/mailer"
-
 	"github.com/rbicker/gooser/internal/auth"
+	"github.com/rbicker/gooser/internal/mailer"
 	"github.com/rbicker/gooser/internal/server"
 	"github.com/rbicker/gooser/internal/store"
+	_ "github.com/rbicker/gooser/internal/translations"
 	"github.com/rbicker/gooser/internal/utils"
 )
 
