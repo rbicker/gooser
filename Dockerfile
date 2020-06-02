@@ -1,7 +1,7 @@
 # builder
 FROM golang:alpine AS builder
 RUN apk update && apk add --no-cache git
-ENV USER=appuser
+ENV USER=app
 ENV UID=10001
 RUN adduser \
     --disabled-password \
@@ -27,6 +27,6 @@ ENV PORT=50051
 COPY --from=builder /etc/passwd /etc/passwd
 COPY --from=builder /etc/group /etc/group
 COPY --from=builder /go/bin/gooser-server /gooser-server
-USER appuser:appuser
-EXPOSE PORT
+USER app:app
+# EXPOSE 50051
 ENTRYPOINT ["/gooser-server"]
