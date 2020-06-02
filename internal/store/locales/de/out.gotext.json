@@ -1,0 +1,265 @@
+{
+    "language": "de",
+    "messages": [
+        {
+            "id": "the request was canceled by the client",
+            "message": "the request was canceled by the client",
+            "translation": "Die Anfrage wurde vom Client abgebrochen"
+        },
+        {
+            "id": "unable to count groups: {Err}",
+            "message": "unable to count groups: {Err}",
+            "translation": "Gruppen konnten nicht gezählt werden: {Err}",
+            "placeholders": [
+                {
+                    "id": "Err",
+                    "string": "%[1]s",
+                    "type": "error",
+                    "underlyingType": "interface{Error() string}",
+                    "argNum": 1,
+                    "expr": "err"
+                }
+            ]
+        },
+        {
+            "id": "unable to query groups: {Err}",
+            "message": "unable to query groups: {Err}",
+            "translation": "Gruppen konnten nicht abgefragt werden: {Err}",
+            "placeholders": [
+                {
+                    "id": "Err",
+                    "string": "%[1]s",
+                    "type": "error",
+                    "underlyingType": "interface{Error() string}",
+                    "argNum": 1,
+                    "expr": "err"
+                }
+            ]
+        },
+        {
+            "id": "unable to decode group: {Err}",
+            "message": "unable to decode group: {Err}",
+            "translation": "Gruppen konnten nicht geladen werden: {Err}",
+            "placeholders": [
+                {
+                    "id": "Err",
+                    "string": "%[1]s",
+                    "type": "error",
+                    "underlyingType": "interface{Error() string}",
+                    "argNum": 1,
+                    "expr": "err"
+                }
+            ]
+        },
+        {
+            "id": "invalid id '{Id}'",
+            "message": "invalid id '{Id}'",
+            "translation": "Ungültige ID '{Id}'",
+            "placeholders": [
+                {
+                    "id": "Id",
+                    "string": "%[1]s",
+                    "type": "string",
+                    "underlyingType": "string",
+                    "argNum": 1,
+                    "expr": "id"
+                }
+            ]
+        },
+        {
+            "id": "unable to find group with id {Id}",
+            "message": "unable to find group with id {Id}",
+            "translation": "Gruppe mit ID '{Id}' konnte nicht gefunden werden",
+            "placeholders": [
+                {
+                    "id": "Id",
+                    "string": "%[1]s",
+                    "type": "string",
+                    "underlyingType": "string",
+                    "argNum": 1,
+                    "expr": "id"
+                }
+            ]
+        },
+        {
+            "id": "unable to find group named {Name}",
+            "message": "unable to find group named {Name}",
+            "translation": "Gruppe mit Name {Name} konnte nicht gefunden werden",
+            "placeholders": [
+                {
+                    "id": "Name",
+                    "string": "%[1]s",
+                    "type": "string",
+                    "underlyingType": "string",
+                    "argNum": 1,
+                    "expr": "name"
+                }
+            ]
+        },
+        {
+            "id": "invalid group id '{Id}'",
+            "message": "invalid group id '{Id}'",
+            "translation": "Ungültige Gruppen ID '{Id}'",
+            "placeholders": [
+                {
+                    "id": "Id",
+                    "string": "%[1]s",
+                    "type": "string",
+                    "underlyingType": "string",
+                    "argNum": 1,
+                    "expr": "group.Id"
+                }
+            ]
+        },
+        {
+            "id": "error while saving group",
+            "message": "error while saving group",
+            "translation": "Fehler beim Speichern der Gruppe"
+        },
+        {
+            "id": "unable to find group with id '{Id}'",
+            "message": "unable to find group with id '{Id}'",
+            "translation": "Gruppe mit ID '{Id}' konnte nicht gefunden werden ",
+            "placeholders": [
+                {
+                    "id": "Id",
+                    "string": "%[1]s",
+                    "type": "string",
+                    "underlyingType": "string",
+                    "argNum": 1,
+                    "expr": "id"
+                }
+            ]
+        },
+        {
+            "id": "unable to json marshal confirmation",
+            "message": "unable to json marshal confirmation",
+            "translation": "Bestätigung konnte nicht umgewandelt werden"
+        },
+        {
+            "id": "unable to encrypt confirmation",
+            "message": "unable to encrypt confirmation",
+            "translation": "Bestätigung konnte nicht verschlüsselt werden"
+        },
+        {
+            "id": "no token given",
+            "message": "no token given",
+            "translation": "kein Token mitgegeben"
+        },
+        {
+            "id": "token mismatch",
+            "message": "token mismatch",
+            "translation": "Token stimmt nicht überein"
+        },
+        {
+            "id": "invalid token",
+            "message": "invalid token",
+            "translation": "ungültiger Token"
+        },
+        {
+            "id": "unable to json marshal reset password struct",
+            "message": "unable to json marshal reset password struct",
+            "translation": "Passwort Reset Objekt konnte nicht umgewandelt werden"
+        },
+        {
+            "id": "unable to encrypt reset password struct",
+            "message": "unable to encrypt reset password struct",
+            "translation": "Passwort Reset Objekt konnte nicht verschlüsselt werden"
+        },
+        {
+            "id": "unable to count users: {Err}",
+            "message": "unable to count users: {Err}",
+            "translation": "Fehler beim Zählen von Benutzern: {Err}",
+            "placeholders": [
+                {
+                    "id": "Err",
+                    "string": "%[1]s",
+                    "type": "error",
+                    "underlyingType": "interface{Error() string}",
+                    "argNum": 1,
+                    "expr": "err"
+                }
+            ]
+        },
+        {
+            "id": "unable to query users: {Err}",
+            "message": "unable to query users: {Err}",
+            "translation": "Fehler beim Abfragen von Benutzern: {Err}",
+            "placeholders": [
+                {
+                    "id": "Err",
+                    "string": "%[1]s",
+                    "type": "error",
+                    "underlyingType": "interface{Error() string}",
+                    "argNum": 1,
+                    "expr": "err"
+                }
+            ]
+        },
+        {
+            "id": "unable to decode user: {Err}",
+            "message": "unable to decode user: {Err}",
+            "translation": "Fehler beim Umwandeln des Benutzers: {Err}",
+            "placeholders": [
+                {
+                    "id": "Err",
+                    "string": "%[1]s",
+                    "type": "error",
+                    "underlyingType": "interface{Error() string}",
+                    "argNum": 1,
+                    "expr": "err"
+                }
+            ]
+        },
+        {
+            "id": "unable to find user with id {Id}",
+            "message": "unable to find user with id {Id}",
+            "translation": "Benutzer mit ID '{Id}' konnte nicht gefunden werden",
+            "placeholders": [
+                {
+                    "id": "Id",
+                    "string": "%[1]s",
+                    "type": "string",
+                    "underlyingType": "string",
+                    "argNum": 1,
+                    "expr": "id"
+                }
+            ]
+        },
+        {
+            "id": "unable to find user",
+            "message": "unable to find user",
+            "translation": "Benutzer konnte nicht gefunden werden"
+        },
+        {
+            "id": "invalid user id '{Id}'",
+            "message": "invalid user id '{Id}'",
+            "translation": "Ungültige Benutzer ID '{Id}'",
+            "placeholders": [
+                {
+                    "id": "Id",
+                    "string": "%[1]s",
+                    "type": "string",
+                    "underlyingType": "string",
+                    "argNum": 1,
+                    "expr": "user.Id"
+                }
+            ]
+        },
+        {
+            "id": "error while saving user",
+            "message": "error while saving user",
+            "translation": "Fehler beim Speichern des Benutzers"
+        },
+        {
+            "id": "invalid user id",
+            "message": "invalid user id",
+            "translation": "ungültige Benutzer ID"
+        },
+        {
+            "id": "unable to find user with given id",
+            "message": "unable to find user with given id",
+            "translation": "Benutzer mit gegebener ID konnte nicht gefunden werden"
+        }
+    ]
+}
