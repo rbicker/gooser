@@ -97,11 +97,11 @@ func (u *User) GenerateConfirmToken(printer *message.Printer, key string) error 
 	}
 	b, err := json.Marshal(c)
 	if err != nil {
-		return status.Errorf(codes.Internal, "%s: %w", printer.Sprintf("unable to json marshal confirmation"), err)
+		return status.Errorf(codes.Internal, printer.Sprintf("unable to json marshal confirmation: %s", err))
 	}
 	enc, err := utils.Encrypt(key, string(b))
 	if err != nil {
-		return status.Errorf(codes.Internal, "%s: %w", printer.Sprintf("unable to encrypt confirmation"), err)
+		return status.Errorf(codes.Internal, printer.Sprintf("unable to encrypt confirmation: %s", err))
 	}
 	u.ConfirmToken = enc
 	return nil
@@ -144,11 +144,11 @@ func (u *User) GeneratePasswordResetToken(printer *message.Printer, key string) 
 	}
 	b, err := json.Marshal(r)
 	if err != nil {
-		return status.Errorf(codes.Internal, "%s: %w", printer.Sprintf("unable to json marshal reset password struct"), err)
+		return status.Errorf(codes.Internal, printer.Sprintf("unable to json marshal reset password struct: %s", err))
 	}
 	enc, err := utils.Encrypt(key, string(b))
 	if err != nil {
-		return status.Errorf(codes.Internal, "%s: %w", printer.Sprintf("unable to encrypt reset password struct"), err)
+		return status.Errorf(codes.Internal, printer.Sprintf("unable to encrypt reset password struct: %s", err))
 	}
 	u.PasswordResetToken = enc
 	return nil
