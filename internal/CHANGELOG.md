@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.1.1] - 2020-06-02
+### Fixed
+* moved Dockerfile to correct location
+
 ## [0.1.0] - 2020-06-01
 ### Added
 * basic functionality to CRUD users & groups
