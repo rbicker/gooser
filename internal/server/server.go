@@ -6,7 +6,6 @@ import (
 	"context"
 	"crypto/md5"
 	"encoding/base64"
-	"encoding/hex"
 	"encoding/json"
 	"fmt"
 	"io"
@@ -84,7 +83,6 @@ func NewServer(secret string, db store.Store, authClient auth.UserLookup, mailer
 		return nil, fmt.Errorf("unable to hash secret key: %w", err)
 	}
 	srv.secret = fmt.Sprintf("%x", h.Sum(nil))
-	hex.EncodeToString(h.Sum(nil))
 	// user from context receiver
 	if srv.contextUserReceiver == nil {
 		srv.contextUserReceiver = func(ctx context.Context, db store.Store) (*store.User, error) {
