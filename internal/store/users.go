@@ -15,21 +15,16 @@ import (
 )
 
 // ListUsers lists users from the mongo db.
-// It returns a grpc status type error if anything goes wrong.
+// It returns the documents, the total size of documents for the given filter and a grpc status type error if anything goes wrong.
 func (m *MGO) ListUsers(ctx context.Context, printer *message.Printer, filter string, size, skip int32) (*[]User, int32, error) {
-	d, err := m.BsonDocFromRsqlString(filter)
+	query, err := m.BsonDocFromRsqlString(filter)
 	if err != nil {
 		return nil, 0, err
-	}
-	countOptions := options.Count()
-	if size > 0 {
-		countOptions.SetLimit(int64(size))
-		countOptions.SetSkip(int64(skip))
 	}
 	if ctx.Err() == context.Canceled {
 		return nil, 0, status.Errorf(codes.Canceled, printer.Sprintf("the request was canceled by the client"))
 	}
-	count, err := m.usersCollection.CountDocuments(ctx, d, countOptions)
+	count, err := m.usersCollection.CountDocuments(ctx, query, nil)
 	if err != nil {
 		return nil, 0, status.Errorf(codes.Internal, printer.Sprintf("unable to count users: %s", err))
 	}
@@ -37,7 +32,7 @@ func (m *MGO) ListUsers(ctx context.Context, printer *message.Printer, filter st
 	findOptions.SetLimit(int64(size))
 	findOptions.SetSkip(int64(skip))
 	findOptions.SetSort(bson.D{{"username", 1}})
-	cur, err := m.usersCollection.Find(ctx, d, findOptions)
+	cur, err := m.usersCollection.Find(ctx, query, findOptions)
 	if err != nil {
 		return nil, 0, status.Errorf(codes.Internal, printer.Sprintf("unable to query users: %s", err))
 	}
