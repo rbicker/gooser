@@ -125,13 +125,7 @@ func (m *MGO) Connect() error {
 		return err
 	}
 	m.usersCollection = m.mongoClient.Database(m.databaseName).Collection(m.usersCollectionName)
-	if err != nil {
-		return fmt.Errorf("unable to use database %s and users collection %s: %w", m.databaseName, m.usersCollectionName, err)
-	}
 	m.groupsCollection = m.mongoClient.Database(m.databaseName).Collection(m.groupsCollectionName)
-	if err != nil {
-		return fmt.Errorf("unable to use database %s and groups collection %s: %w", m.databaseName, m.groupsCollectionName, err)
-	}
 	return nil
 }
 
