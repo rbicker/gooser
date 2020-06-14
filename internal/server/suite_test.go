@@ -83,7 +83,7 @@ func (suite *Suite) SetupSuite() {
 }
 
 // NewClientConnection creates a new grpc client connection.
-func (suite *Suite) NewClientConnection(meta map[string]string) (*grpc.ClientConn, error) {
+func (suite *Suite) NewClientConnection() (*grpc.ClientConn, error) {
 	// create dialer for client
 	bufDialer := func(context.Context, string) (net.Conn, error) {
 		return suite.listener.Dial()

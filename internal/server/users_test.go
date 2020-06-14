@@ -23,7 +23,7 @@ import (
 func (suite *Suite) TestListUsers() {
 	t := suite.T()
 	// client connection
-	conn, err := suite.NewClientConnection(nil)
+	conn, err := suite.NewClientConnection()
 	if err != nil {
 		t.Fatalf("unable to create client connection: %s", err)
 	}
@@ -106,7 +106,7 @@ func (suite *Suite) TestListUsers() {
 func (suite *Suite) TestGetUser() {
 	t := suite.T()
 	// client connection
-	conn, err := suite.NewClientConnection(nil)
+	conn, err := suite.NewClientConnection()
 	if err != nil {
 		t.Fatalf("unable to create client connection: %s", err)
 	}
@@ -208,7 +208,7 @@ func (suite *Suite) TestGetUser() {
 func (suite *Suite) TestCreateUser() {
 	t := suite.T()
 	// client connection
-	conn, err := suite.NewClientConnection(nil)
+	conn, err := suite.NewClientConnection()
 	if err != nil {
 		t.Fatalf("unable to create client connection: %s", err)
 	}
@@ -392,7 +392,7 @@ func (suite *Suite) TestCreateUser() {
 func (suite *Suite) TestUpdateUser() {
 	t := suite.T()
 	// client connection
-	conn, err := suite.NewClientConnection(nil)
+	conn, err := suite.NewClientConnection()
 	if err != nil {
 		t.Fatalf("unable to create client connection: %s", err)
 	}
@@ -693,7 +693,7 @@ func (suite *Suite) TestUpdateUser() {
 func (suite *Suite) TestDeleteUser() {
 	t := suite.T()
 	// client connection
-	conn, err := suite.NewClientConnection(nil)
+	conn, err := suite.NewClientConnection()
 	if err != nil {
 		t.Fatalf("unable to create client connection: %s", err)
 	}
@@ -794,7 +794,7 @@ func (suite *Suite) TestDeleteUser() {
 func (suite *Suite) TestChangePassword() {
 	t := suite.T()
 	// client connection
-	conn, err := suite.NewClientConnection(nil)
+	conn, err := suite.NewClientConnection()
 	if err != nil {
 		t.Fatalf("unable to create client connection: %s", err)
 	}
@@ -909,7 +909,7 @@ func (suite *Suite) TestConfirmMail() {
 	t := suite.T()
 	printer := message.NewPrinter(language.English)
 	// client connection
-	conn, err := suite.NewClientConnection(nil)
+	conn, err := suite.NewClientConnection()
 	if err != nil {
 		t.Fatalf("unable to create client connection: %s", err)
 	}
@@ -1023,7 +1023,7 @@ func (suite *Suite) TestConfirmMail() {
 func (suite *Suite) TestForgotPassword() {
 	t := suite.T()
 	// client connection
-	conn, err := suite.NewClientConnection(nil)
+	conn, err := suite.NewClientConnection()
 	if err != nil {
 		t.Fatalf("unable to create client connection: %s", err)
 	}
@@ -1102,7 +1102,7 @@ func (suite *Suite) TestForgotPassword() {
 func (suite *Suite) TestResetPassword() {
 	t := suite.T()
 	// client connection
-	conn, err := suite.NewClientConnection(nil)
+	conn, err := suite.NewClientConnection()
 	if err != nil {
 		t.Fatalf("unable to create client connection: %s", err)
 	}

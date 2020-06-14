@@ -22,7 +22,7 @@ import (
 func (suite *Suite) TestListGroups() {
 	t := suite.T()
 	// client connection
-	conn, err := suite.NewClientConnection(nil)
+	conn, err := suite.NewClientConnection()
 	if err != nil {
 		t.Fatalf("unable to create client connection: %s", err)
 	}
@@ -107,7 +107,7 @@ func (suite *Suite) TestListGroups() {
 func (suite *Suite) TestGetGroup() {
 	t := suite.T()
 	// client connection
-	conn, err := suite.NewClientConnection(nil)
+	conn, err := suite.NewClientConnection()
 	if err != nil {
 		t.Fatalf("unable to create client connection: %s", err)
 	}
@@ -209,7 +209,7 @@ func (suite *Suite) TestGetGroup() {
 func (suite *Suite) TestCreateGroup() {
 	t := suite.T()
 	// client connection
-	conn, err := suite.NewClientConnection(nil)
+	conn, err := suite.NewClientConnection()
 	if err != nil {
 		t.Fatalf("unable to create client connection: %s", err)
 	}
@@ -382,7 +382,7 @@ func (suite *Suite) TestCreateGroup() {
 func (suite *Suite) TestUpdateGroup() {
 	t := suite.T()
 	// client connection
-	conn, err := suite.NewClientConnection(nil)
+	conn, err := suite.NewClientConnection()
 	if err != nil {
 		t.Fatalf("unable to create client connection: %s", err)
 	}
@@ -548,7 +548,7 @@ func (suite *Suite) TestUpdateGroup() {
 func (suite *Suite) TestDeleteGroup() {
 	t := suite.T()
 	// client connection
-	conn, err := suite.NewClientConnection(nil)
+	conn, err := suite.NewClientConnection()
 	if err != nil {
 		t.Fatalf("unable to create client connection: %s", err)
 	}
