@@ -102,7 +102,7 @@ func (suite *Suite) TestListGroups() {
 			}
 			// check result
 			assert.Equal(tt.wantLen, len(res.Groups), "length mismatch")
-			assert.Equal(tt.wantNextPageToken, res.NextPageToken, "token missmatch")
+			assert.Equal(tt.wantNextPageToken, res.NextPageToken, "token mismatch")
 		})
 	}
 }
