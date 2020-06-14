@@ -29,10 +29,6 @@ func (suite *Suite) TestListUsers() {
 	}
 	defer conn.Close()
 	client := gooserv1.NewGooserClient(conn)
-	// test page token
-	if err != nil {
-		t.Fatalf("error while creating page token: %s", err)
-	}
 	// tests
 	tests := []struct {
 		name              string
@@ -116,9 +112,6 @@ func (suite *Suite) TestGetUser() {
 	}
 	defer conn.Close()
 	client := gooserv1.NewGooserClient(conn)
-	if err != nil {
-		t.Fatalf("error while creating gooser client: %s", err)
-	}
 	// tests
 	tests := []struct {
 		name          string
@@ -221,9 +214,6 @@ func (suite *Suite) TestCreateUser() {
 	}
 	defer conn.Close()
 	client := gooserv1.NewGooserClient(conn)
-	if err != nil {
-		t.Fatalf("error while creating gooser client: %s", err)
-	}
 	// tests
 	tests := []struct {
 		name          string
@@ -408,9 +398,6 @@ func (suite *Suite) TestUpdateUser() {
 	}
 	defer conn.Close()
 	client := gooserv1.NewGooserClient(conn)
-	if err != nil {
-		t.Fatalf("error while creating gooser client: %s", err)
-	}
 	// tests
 	tests := []struct {
 		name          string
@@ -712,9 +699,6 @@ func (suite *Suite) TestDeleteUser() {
 	}
 	defer conn.Close()
 	client := gooserv1.NewGooserClient(conn)
-	if err != nil {
-		t.Fatalf("error while creating gooser client: %s", err)
-	}
 	// tests
 	tests := []struct {
 		name        string
@@ -816,9 +800,6 @@ func (suite *Suite) TestChangePassword() {
 	}
 	defer conn.Close()
 	client := gooserv1.NewGooserClient(conn)
-	if err != nil {
-		t.Fatalf("error while creating gooser client: %s", err)
-	}
 	// tests
 	tests := []struct {
 		name        string
@@ -934,9 +915,6 @@ func (suite *Suite) TestConfirmMail() {
 	}
 	defer conn.Close()
 	client := gooserv1.NewGooserClient(conn)
-	if err != nil {
-		t.Fatalf("error while creating gooser client: %s", err)
-	}
 	user := store.User{
 		Mail: "user1@testing.com",
 	}
@@ -1051,9 +1029,6 @@ func (suite *Suite) TestForgotPassword() {
 	}
 	defer conn.Close()
 	client := gooserv1.NewGooserClient(conn)
-	if err != nil {
-		t.Fatalf("error while creating gooser client: %s", err)
-	}
 	// tests
 	tests := []struct {
 		name     string

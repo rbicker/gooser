@@ -28,9 +28,6 @@ func (suite *Suite) TestListGroups() {
 	}
 	defer conn.Close()
 	client := gooserv1.NewGooserClient(conn)
-	if err != nil {
-		t.Fatalf("error while creating page token: %s", err)
-	}
 	// tests
 	tests := []struct {
 		name              string
@@ -116,9 +113,6 @@ func (suite *Suite) TestGetGroup() {
 	}
 	defer conn.Close()
 	client := gooserv1.NewGooserClient(conn)
-	if err != nil {
-		t.Fatalf("error while creating gooser client: %s", err)
-	}
 	// tests
 	tests := []struct {
 		name        string
@@ -221,9 +215,6 @@ func (suite *Suite) TestCreateGroup() {
 	}
 	defer conn.Close()
 	client := gooserv1.NewGooserClient(conn)
-	if err != nil {
-		t.Fatalf("error while creating gooser client: %s", err)
-	}
 	// tests
 	tests := []struct {
 		name        string
@@ -397,9 +388,6 @@ func (suite *Suite) TestUpdateGroup() {
 	}
 	defer conn.Close()
 	client := gooserv1.NewGooserClient(conn)
-	if err != nil {
-		t.Fatalf("error while creating gooser client: %s", err)
-	}
 	// tests
 	tests := []struct {
 		name        string
@@ -566,9 +554,6 @@ func (suite *Suite) TestDeleteGroup() {
 	}
 	defer conn.Close()
 	client := gooserv1.NewGooserClient(conn)
-	if err != nil {
-		t.Fatalf("error while creating gooser client: %s", err)
-	}
 	// tests
 	tests := []struct {
 		name        string
