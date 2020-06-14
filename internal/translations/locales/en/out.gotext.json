@@ -2,283 +2,30 @@
     "language": "en",
     "messages": [
         {
-            "id": "{SiteName}: confirm mail address",
-            "message": "{SiteName}: confirm mail address",
-            "translation": "{SiteName}: confirm mail address",
-            "translatorComment": "Copied from source.",
-            "placeholders": [
-                {
-                    "id": "SiteName",
-                    "string": "%[1]s",
-                    "type": "string",
-                    "underlyingType": "string",
-                    "argNum": 1,
-                    "expr": "m.siteName"
-                }
-            ],
-            "fuzzy": true
-        },
-        {
-            "id": "Hi {Username}! Please confirm your mail address by clicking the following link. Thanks!\n{Link}",
-            "message": "Hi {Username}! Please confirm your mail address by clicking the following link. Thanks!\n{Link}",
-            "translation": "Hi {Username}! Please confirm your mail address by clicking the following link. Thanks!\n{Link}",
-            "translatorComment": "Copied from source.",
-            "placeholders": [
-                {
-                    "id": "Username",
-                    "string": "%[1]s",
-                    "type": "string",
-                    "underlyingType": "string",
-                    "argNum": 1,
-                    "expr": "user.Username"
-                },
-                {
-                    "id": "Link",
-                    "string": "%[2]s",
-                    "type": "string",
-                    "underlyingType": "string",
-                    "argNum": 2,
-                    "expr": "link"
-                }
-            ],
-            "fuzzy": true
-        },
-        {
-            "id": "error while sending mail: {Err}",
-            "message": "error while sending mail: {Err}",
-            "translation": "error while sending mail: {Err}",
-            "translatorComment": "Copied from source.",
-            "placeholders": [
-                {
-                    "id": "Err",
-                    "string": "%[1]s",
-                    "type": "error",
-                    "underlyingType": "interface{Error() string}",
-                    "argNum": 1,
-                    "expr": "err"
-                }
-            ],
-            "fuzzy": true
-        },
-        {
-            "id": "{SiteName}: password reset",
-            "message": "{SiteName}: password reset",
-            "translation": "{SiteName}: password reset",
-            "translatorComment": "Copied from source.",
-            "placeholders": [
-                {
-                    "id": "SiteName",
-                    "string": "%[1]s",
-                    "type": "string",
-                    "underlyingType": "string",
-                    "argNum": 1,
-                    "expr": "m.siteName"
-                }
-            ],
-            "fuzzy": true
-        },
-        {
-            "id": "Hi {Username}! To reset your password, click the following link: \n{Link}\n\nIf you did not request to reset your password, please ignore this message. Thanks",
-            "message": "Hi {Username}! To reset your password, click the following link: \n{Link}\n\nIf you did not request to reset your password, please ignore this message. Thanks",
-            "translation": "Hi {Username}! To reset your password, click the following link: \n{Link}\n\nIf you did not request to reset your password, please ignore this message. Thanks",
-            "translatorComment": "Copied from source.",
-            "placeholders": [
-                {
-                    "id": "Username",
-                    "string": "%[1]s",
-                    "type": "string",
-                    "underlyingType": "string",
-                    "argNum": 1,
-                    "expr": "user.Username"
-                },
-                {
-                    "id": "Link",
-                    "string": "%[2]s",
-                    "type": "string",
-                    "underlyingType": "string",
-                    "argNum": 2,
-                    "expr": "link"
-                }
-            ],
-            "fuzzy": true
-        },
-        {
-            "id": "unable to create page token: {Err}",
-            "message": "unable to create page token: {Err}",
-            "translation": "unable to create page token: {Err}",
-            "translatorComment": "Copied from source.",
-            "placeholders": [
-                {
-                    "id": "Err",
-                    "string": "%[1]s",
-                    "type": "error",
-                    "underlyingType": "interface{Error() string}",
-                    "argNum": 1,
-                    "expr": "err"
-                }
-            ],
-            "fuzzy": true
-        },
-        {
-            "id": "could not find group with id {Id}",
-            "message": "could not find group with id {Id}",
-            "translation": "could not find group with id {Id}",
-            "translatorComment": "Copied from source.",
-            "placeholders": [
-                {
-                    "id": "Id",
-                    "string": "%[1]s",
-                    "type": "string",
-                    "underlyingType": "string",
-                    "argNum": 1,
-                    "expr": "req.GetId()"
-                }
-            ],
-            "fuzzy": true
-        },
-        {
-            "id": "group name needs to have a length of at least 3",
-            "message": "group name needs to have a length of at least 3",
-            "translation": "group name needs to have a length of at least 3",
+            "id": "internal error while building filter",
+            "message": "internal error while building filter",
+            "translation": "internal error while building filter",
             "translatorComment": "Copied from source.",
             "fuzzy": true
         },
         {
-            "id": "error while counting groups",
-            "message": "error while counting groups",
-            "translation": "error while counting groups",
+            "id": "orderBy field has a length of 0",
+            "message": "orderBy field has a length of 0",
+            "translation": "orderBy field has a length of 0",
             "translatorComment": "Copied from source.",
             "fuzzy": true
         },
         {
-            "id": "unable to query members",
-            "message": "unable to query members",
-            "translation": "unable to query members",
+            "id": "unable to search next document while creating pagination token",
+            "message": "unable to search next document while creating pagination token",
+            "translation": "unable to search next document while creating pagination token",
             "translatorComment": "Copied from source.",
             "fuzzy": true
         },
         {
-            "id": "only {Intsize} of {LenmemberIds} given memberIds were found",
-            "message": "only {Intsize} of {LenmemberIds} given memberIds were found",
-            "translation": "only {Intsize} of {LenmemberIds} given memberIds were found",
-            "translatorComment": "Copied from source.",
-            "placeholders": [
-                {
-                    "id": "Intsize",
-                    "string": "%[1]v",
-                    "type": "int",
-                    "underlyingType": "int",
-                    "argNum": 1,
-                    "expr": "int(size)"
-                },
-                {
-                    "id": "LenmemberIds",
-                    "string": "%[2]v",
-                    "type": "int",
-                    "underlyingType": "int",
-                    "argNum": 2,
-                    "expr": "len(memberIds)"
-                }
-            ],
-            "fuzzy": true
-        },
-        {
-            "id": "error while looking up groups",
-            "message": "error while looking up groups",
-            "translation": "error while looking up groups",
-            "translatorComment": "Copied from source.",
-            "fuzzy": true
-        },
-        {
-            "id": "error while querying member",
-            "message": "error while querying member",
-            "translation": "error while querying member",
-            "translatorComment": "Copied from source.",
-            "fuzzy": true
-        },
-        {
-            "id": "not allowed to create groups",
-            "message": "not allowed to create groups",
-            "translation": "not allowed to create groups",
-            "translatorComment": "Copied from source.",
-            "fuzzy": true
-        },
-        {
-            "id": "not allowed to update groups",
-            "message": "not allowed to update groups",
-            "translation": "not allowed to update groups",
-            "translatorComment": "Copied from source.",
-            "fuzzy": true
-        },
-        {
-            "id": "unable to create generate field mask: {Err}",
-            "message": "unable to create generate field mask: {Err}",
-            "translation": "unable to create generate field mask: {Err}",
-            "translatorComment": "Copied from source.",
-            "placeholders": [
-                {
-                    "id": "Err",
-                    "string": "%[1]s",
-                    "type": "error",
-                    "underlyingType": "interface{Error() string}",
-                    "argNum": 1,
-                    "expr": "err"
-                }
-            ],
-            "fuzzy": true
-        },
-        {
-            "id": "unable to merge groups",
-            "message": "unable to merge groups",
-            "translation": "unable to merge groups",
-            "translatorComment": "Copied from source.",
-            "fuzzy": true
-        },
-        {
-            "id": "not allowed to delete groups",
-            "message": "not allowed to delete groups",
-            "translation": "not allowed to delete groups",
-            "translatorComment": "Copied from source.",
-            "fuzzy": true
-        },
-        {
-            "id": "unable to marshal token to json: {Err}",
-            "message": "unable to marshal token to json: {Err}",
-            "translation": "unable to marshal token to json: {Err}",
-            "translatorComment": "Copied from source.",
-            "placeholders": [
-                {
-                    "id": "Err",
-                    "string": "%[1]s",
-                    "type": "error",
-                    "underlyingType": "interface{Error() string}",
-                    "argNum": 1,
-                    "expr": "err"
-                }
-            ],
-            "fuzzy": true
-        },
-        {
-            "id": "invalid page token, unable to unmarshal to page token: {Err}",
-            "message": "invalid page token, unable to unmarshal to page token: {Err}",
-            "translation": "invalid page token, unable to unmarshal to page token: {Err}",
-            "translatorComment": "Copied from source.",
-            "placeholders": [
-                {
-                    "id": "Err",
-                    "string": "%[1]s",
-                    "type": "error",
-                    "underlyingType": "interface{Error() string}",
-                    "argNum": 1,
-                    "expr": "err"
-                }
-            ],
-            "fuzzy": true
-        },
-        {
-            "id": "mismatch between given filter {Filter} and filter in page token {Filter_1}",
-            "message": "mismatch between given filter {Filter} and filter in page token {Filter_1}",
-            "translation": "mismatch between given filter {Filter} and filter in page token {Filter_1}",
+            "id": "invalid rsql filter string '{Filter}': {Err}",
+            "message": "invalid rsql filter string '{Filter}': {Err}",
+            "translation": "invalid rsql filter string '{Filter}': {Err}",
             "translatorComment": "Copied from source.",
             "placeholders": [
                 {
@@ -290,187 +37,51 @@
                     "expr": "filter"
                 },
                 {
-                    "id": "Filter_1",
+                    "id": "Err",
                     "string": "%[2]s",
-                    "type": "string",
-                    "underlyingType": "string",
+                    "type": "error",
+                    "underlyingType": "interface{Error() string}",
                     "argNum": 2,
-                    "expr": "t.Filter"
+                    "expr": "err"
                 }
             ],
             "fuzzy": true
         },
         {
-            "id": "could not find user with id {Id}",
-            "message": "could not find user with id {Id}",
-            "translation": "could not find user with id {Id}",
+            "id": "{S} has a length of 0",
+            "message": "{S} has a length of 0",
+            "translation": "{S} has a length of 0",
             "translatorComment": "Copied from source.",
             "placeholders": [
                 {
-                    "id": "Id",
+                    "id": "S",
                     "string": "%[1]s",
                     "type": "string",
                     "underlyingType": "string",
                     "argNum": 1,
-                    "expr": "req.GetId()"
+                    "expr": "s"
                 }
             ],
             "fuzzy": true
         },
         {
-            "id": "invalid username, only lowercase letters and numbers are allowed",
-            "message": "invalid username, only lowercase letters and numbers are allowed",
-            "translation": "invalid username, only lowercase letters and numbers are allowed",
+            "id": "invalid page token given",
+            "message": "invalid page token given",
+            "translation": "invalid page token given",
             "translatorComment": "Copied from source.",
             "fuzzy": true
         },
         {
-            "id": "could not parse given language",
-            "message": "could not parse given language",
-            "translation": "could not parse given language",
+            "id": "pagination filter and given filters do not match",
+            "message": "pagination filter and given filters do not match",
+            "translation": "pagination filter and given filters do not match",
             "translatorComment": "Copied from source.",
             "fuzzy": true
         },
         {
-            "id": "invalid mail address",
-            "message": "invalid mail address",
-            "translation": "invalid mail address",
-            "translatorComment": "Copied from source.",
-            "fuzzy": true
-        },
-        {
-            "id": "error while counting users",
-            "message": "error while counting users",
-            "translation": "error while counting users",
-            "translatorComment": "Copied from source.",
-            "fuzzy": true
-        },
-        {
-            "id": "password must have a length of at least 7",
-            "message": "password must have a length of at least 7",
-            "translation": "password must have a length of at least 7",
-            "translatorComment": "Copied from source.",
-            "fuzzy": true
-        },
-        {
-            "id": "roles cannot be assigned to users directly, use groups instead",
-            "message": "roles cannot be assigned to users directly, use groups instead",
-            "translation": "roles cannot be assigned to users directly, use groups instead",
-            "translatorComment": "Copied from source.",
-            "fuzzy": true
-        },
-        {
-            "id": "mail address not set",
-            "message": "mail address not set",
-            "translation": "mail address not set",
-            "translatorComment": "Copied from source.",
-            "fuzzy": true
-        },
-        {
-            "id": "not allowed to set confirmed",
-            "message": "not allowed to set confirmed",
-            "translation": "not allowed to set confirmed",
-            "translatorComment": "Copied from source.",
-            "fuzzy": true
-        },
-        {
-            "id": "unable to hash given password",
-            "message": "unable to hash given password",
-            "translation": "unable to hash given password",
-            "translatorComment": "Copied from source.",
-            "fuzzy": true
-        },
-        {
-            "id": "not allowed to edit other users",
-            "message": "not allowed to edit other users",
-            "translation": "not allowed to edit other users",
-            "translatorComment": "Copied from source.",
-            "fuzzy": true
-        },
-        {
-            "id": "roles cannot be assigned to users directly",
-            "message": "roles cannot be assigned to users directly",
-            "translation": "roles cannot be assigned to users directly",
-            "translatorComment": "Copied from source.",
-            "fuzzy": true
-        },
-        {
-            "id": "password cannot be changed using the UpdateUser function, use ChangePassword instead",
-            "message": "password cannot be changed using the UpdateUser function, use ChangePassword instead",
-            "translation": "password cannot be changed using the UpdateUser function, use ChangePassword instead",
-            "translatorComment": "Copied from source.",
-            "fuzzy": true
-        },
-        {
-            "id": "unable to merge users",
-            "message": "unable to merge users",
-            "translation": "unable to merge users",
-            "translatorComment": "Copied from source.",
-            "fuzzy": true
-        },
-        {
-            "id": "not allowed to delete user",
-            "message": "not allowed to delete user",
-            "translation": "not allowed to delete user",
-            "translatorComment": "Copied from source.",
-            "fuzzy": true
-        },
-        {
-            "id": "unable to remove user from group {Name}",
-            "message": "unable to remove user from group {Name}",
-            "translation": "unable to remove user from group {Name}",
-            "translatorComment": "Copied from source.",
-            "placeholders": [
-                {
-                    "id": "Name",
-                    "string": "%[1]s",
-                    "type": "string",
-                    "underlyingType": "string",
-                    "argNum": 1,
-                    "expr": "g.Name"
-                }
-            ],
-            "fuzzy": true
-        },
-        {
-            "id": "not allowed to change password for other users",
-            "message": "not allowed to change password for other users",
-            "translation": "not allowed to change password for other users",
-            "translatorComment": "Copied from source.",
-            "fuzzy": true
-        },
-        {
-            "id": "password mismatch",
-            "message": "password mismatch",
-            "translation": "password mismatch",
-            "translatorComment": "Copied from source.",
-            "fuzzy": true
-        },
-        {
-            "id": "unable to save user",
-            "message": "unable to save user",
-            "translation": "unable to save user",
-            "translatorComment": "Copied from source.",
-            "fuzzy": true
-        },
-        {
-            "id": "unable to send reset password mail",
-            "message": "unable to send reset password mail",
-            "translation": "unable to send reset password mail",
-            "translatorComment": "Copied from source.",
-            "fuzzy": true
-        },
-        {
-            "id": "no token given",
-            "message": "no token given",
-            "translation": "no token given",
-            "translatorComment": "Copied from source.",
-            "fuzzy": true
-        },
-        {
-            "id": "invalid token",
-            "message": "invalid token",
-            "translation": "invalid token",
+            "id": "pagination orderBy and given orderBy do not match",
+            "message": "pagination orderBy and given orderBy do not match",
+            "translation": "pagination orderBy and given orderBy do not match",
             "translatorComment": "Copied from source.",
             "fuzzy": true
         },
@@ -482,35 +93,35 @@
             "fuzzy": true
         },
         {
-            "id": "unable to count groups: {Err}",
-            "message": "unable to count groups: {Err}",
-            "translation": "unable to count groups: {Err}",
+            "id": "unable to count {Name}",
+            "message": "unable to count {Name}",
+            "translation": "unable to count {Name}",
             "translatorComment": "Copied from source.",
             "placeholders": [
                 {
-                    "id": "Err",
+                    "id": "Name",
                     "string": "%[1]s",
-                    "type": "error",
-                    "underlyingType": "interface{Error() string}",
+                    "type": "string",
+                    "underlyingType": "string",
                     "argNum": 1,
-                    "expr": "err"
+                    "expr": "collection.Name()"
                 }
             ],
             "fuzzy": true
         },
         {
-            "id": "unable to query groups: {Err}",
-            "message": "unable to query groups: {Err}",
-            "translation": "unable to query groups: {Err}",
+            "id": "error while querying {Name}",
+            "message": "error while querying {Name}",
+            "translation": "error while querying {Name}",
             "translatorComment": "Copied from source.",
             "placeholders": [
                 {
-                    "id": "Err",
+                    "id": "Name",
                     "string": "%[1]s",
-                    "type": "error",
-                    "underlyingType": "interface{Error() string}",
+                    "type": "string",
+                    "underlyingType": "string",
                     "argNum": 1,
-                    "expr": "err"
+                    "expr": "collection.Name()"
                 }
             ],
             "fuzzy": true
@@ -530,6 +141,13 @@
                     "expr": "err"
                 }
             ],
+            "fuzzy": true
+        },
+        {
+            "id": "unable to count groups",
+            "message": "unable to count groups",
+            "translation": "unable to count groups",
+            "translatorComment": "Copied from source.",
             "fuzzy": true
         },
         {
@@ -659,9 +277,23 @@
             "fuzzy": true
         },
         {
+            "id": "no token given",
+            "message": "no token given",
+            "translation": "no token given",
+            "translatorComment": "Copied from source.",
+            "fuzzy": true
+        },
+        {
             "id": "token mismatch",
             "message": "token mismatch",
             "translation": "token mismatch",
+            "translatorComment": "Copied from source.",
+            "fuzzy": true
+        },
+        {
+            "id": "invalid token",
+            "message": "invalid token",
+            "translation": "invalid token",
             "translatorComment": "Copied from source.",
             "fuzzy": true
         },
@@ -700,40 +332,6 @@
             "fuzzy": true
         },
         {
-            "id": "unable to count users: {Err}",
-            "message": "unable to count users: {Err}",
-            "translation": "unable to count users: {Err}",
-            "translatorComment": "Copied from source.",
-            "placeholders": [
-                {
-                    "id": "Err",
-                    "string": "%[1]s",
-                    "type": "error",
-                    "underlyingType": "interface{Error() string}",
-                    "argNum": 1,
-                    "expr": "err"
-                }
-            ],
-            "fuzzy": true
-        },
-        {
-            "id": "unable to query users: {Err}",
-            "message": "unable to query users: {Err}",
-            "translation": "unable to query users: {Err}",
-            "translatorComment": "Copied from source.",
-            "placeholders": [
-                {
-                    "id": "Err",
-                    "string": "%[1]s",
-                    "type": "error",
-                    "underlyingType": "interface{Error() string}",
-                    "argNum": 1,
-                    "expr": "err"
-                }
-            ],
-            "fuzzy": true
-        },
-        {
             "id": "unable to decode user: {Err}",
             "message": "unable to decode user: {Err}",
             "translation": "unable to decode user: {Err}",
@@ -748,6 +346,13 @@
                     "expr": "err"
                 }
             ],
+            "fuzzy": true
+        },
+        {
+            "id": "unable to count users",
+            "message": "unable to count users",
+            "translation": "unable to count users",
+            "translatorComment": "Copied from source.",
             "fuzzy": true
         },
         {
@@ -809,6 +414,368 @@
             "id": "unable to find user with given id",
             "message": "unable to find user with given id",
             "translation": "unable to find user with given id",
+            "translatorComment": "Copied from source.",
+            "fuzzy": true
+        },
+        {
+            "id": "{SiteName}: confirm mail address",
+            "message": "{SiteName}: confirm mail address",
+            "translation": "{SiteName}: confirm mail address",
+            "translatorComment": "Copied from source.",
+            "placeholders": [
+                {
+                    "id": "SiteName",
+                    "string": "%[1]s",
+                    "type": "string",
+                    "underlyingType": "string",
+                    "argNum": 1,
+                    "expr": "m.siteName"
+                }
+            ],
+            "fuzzy": true
+        },
+        {
+            "id": "Hi {Username}! Please confirm your mail address by clicking the following link. Thanks!\n{Link}",
+            "message": "Hi {Username}! Please confirm your mail address by clicking the following link. Thanks!\n{Link}",
+            "translation": "Hi {Username}! Please confirm your mail address by clicking the following link. Thanks!\n{Link}",
+            "translatorComment": "Copied from source.",
+            "placeholders": [
+                {
+                    "id": "Username",
+                    "string": "%[1]s",
+                    "type": "string",
+                    "underlyingType": "string",
+                    "argNum": 1,
+                    "expr": "user.Username"
+                },
+                {
+                    "id": "Link",
+                    "string": "%[2]s",
+                    "type": "string",
+                    "underlyingType": "string",
+                    "argNum": 2,
+                    "expr": "link"
+                }
+            ],
+            "fuzzy": true
+        },
+        {
+            "id": "error while sending mail: {Err}",
+            "message": "error while sending mail: {Err}",
+            "translation": "error while sending mail: {Err}",
+            "translatorComment": "Copied from source.",
+            "placeholders": [
+                {
+                    "id": "Err",
+                    "string": "%[1]s",
+                    "type": "error",
+                    "underlyingType": "interface{Error() string}",
+                    "argNum": 1,
+                    "expr": "err"
+                }
+            ],
+            "fuzzy": true
+        },
+        {
+            "id": "{SiteName}: password reset",
+            "message": "{SiteName}: password reset",
+            "translation": "{SiteName}: password reset",
+            "translatorComment": "Copied from source.",
+            "placeholders": [
+                {
+                    "id": "SiteName",
+                    "string": "%[1]s",
+                    "type": "string",
+                    "underlyingType": "string",
+                    "argNum": 1,
+                    "expr": "m.siteName"
+                }
+            ],
+            "fuzzy": true
+        },
+        {
+            "id": "Hi {Username}! To reset your password, click the following link: \n{Link}\n\nIf you did not request to reset your password, please ignore this message. Thanks",
+            "message": "Hi {Username}! To reset your password, click the following link: \n{Link}\n\nIf you did not request to reset your password, please ignore this message. Thanks",
+            "translation": "Hi {Username}! To reset your password, click the following link: \n{Link}\n\nIf you did not request to reset your password, please ignore this message. Thanks",
+            "translatorComment": "Copied from source.",
+            "placeholders": [
+                {
+                    "id": "Username",
+                    "string": "%[1]s",
+                    "type": "string",
+                    "underlyingType": "string",
+                    "argNum": 1,
+                    "expr": "user.Username"
+                },
+                {
+                    "id": "Link",
+                    "string": "%[2]s",
+                    "type": "string",
+                    "underlyingType": "string",
+                    "argNum": 2,
+                    "expr": "link"
+                }
+            ],
+            "fuzzy": true
+        },
+        {
+            "id": "could not find group with id {Id}",
+            "message": "could not find group with id {Id}",
+            "translation": "could not find group with id {Id}",
+            "translatorComment": "Copied from source.",
+            "placeholders": [
+                {
+                    "id": "Id",
+                    "string": "%[1]s",
+                    "type": "string",
+                    "underlyingType": "string",
+                    "argNum": 1,
+                    "expr": "req.GetId()"
+                }
+            ],
+            "fuzzy": true
+        },
+        {
+            "id": "group name needs to have a length of at least 3",
+            "message": "group name needs to have a length of at least 3",
+            "translation": "group name needs to have a length of at least 3",
+            "translatorComment": "Copied from source.",
+            "fuzzy": true
+        },
+        {
+            "id": "unable to query members",
+            "message": "unable to query members",
+            "translation": "unable to query members",
+            "translatorComment": "Copied from source.",
+            "fuzzy": true
+        },
+        {
+            "id": "only {Intsize} of {LenmemberIds} given memberIds were found",
+            "message": "only {Intsize} of {LenmemberIds} given memberIds were found",
+            "translation": "only {Intsize} of {LenmemberIds} given memberIds were found",
+            "translatorComment": "Copied from source.",
+            "placeholders": [
+                {
+                    "id": "Intsize",
+                    "string": "%[1]v",
+                    "type": "int",
+                    "underlyingType": "int",
+                    "argNum": 1,
+                    "expr": "int(size)"
+                },
+                {
+                    "id": "LenmemberIds",
+                    "string": "%[2]v",
+                    "type": "int",
+                    "underlyingType": "int",
+                    "argNum": 2,
+                    "expr": "len(memberIds)"
+                }
+            ],
+            "fuzzy": true
+        },
+        {
+            "id": "error while querying member",
+            "message": "error while querying member",
+            "translation": "error while querying member",
+            "translatorComment": "Copied from source.",
+            "fuzzy": true
+        },
+        {
+            "id": "not allowed to create groups",
+            "message": "not allowed to create groups",
+            "translation": "not allowed to create groups",
+            "translatorComment": "Copied from source.",
+            "fuzzy": true
+        },
+        {
+            "id": "not allowed to update groups",
+            "message": "not allowed to update groups",
+            "translation": "not allowed to update groups",
+            "translatorComment": "Copied from source.",
+            "fuzzy": true
+        },
+        {
+            "id": "unable to create generate field mask: {Err}",
+            "message": "unable to create generate field mask: {Err}",
+            "translation": "unable to create generate field mask: {Err}",
+            "translatorComment": "Copied from source.",
+            "placeholders": [
+                {
+                    "id": "Err",
+                    "string": "%[1]s",
+                    "type": "error",
+                    "underlyingType": "interface{Error() string}",
+                    "argNum": 1,
+                    "expr": "err"
+                }
+            ],
+            "fuzzy": true
+        },
+        {
+            "id": "unable to merge groups",
+            "message": "unable to merge groups",
+            "translation": "unable to merge groups",
+            "translatorComment": "Copied from source.",
+            "fuzzy": true
+        },
+        {
+            "id": "not allowed to delete groups",
+            "message": "not allowed to delete groups",
+            "translation": "not allowed to delete groups",
+            "translatorComment": "Copied from source.",
+            "fuzzy": true
+        },
+        {
+            "id": "could not find user with id {Id}",
+            "message": "could not find user with id {Id}",
+            "translation": "could not find user with id {Id}",
+            "translatorComment": "Copied from source.",
+            "placeholders": [
+                {
+                    "id": "Id",
+                    "string": "%[1]s",
+                    "type": "string",
+                    "underlyingType": "string",
+                    "argNum": 1,
+                    "expr": "req.GetId()"
+                }
+            ],
+            "fuzzy": true
+        },
+        {
+            "id": "invalid username, only lowercase letters and numbers are allowed",
+            "message": "invalid username, only lowercase letters and numbers are allowed",
+            "translation": "invalid username, only lowercase letters and numbers are allowed",
+            "translatorComment": "Copied from source.",
+            "fuzzy": true
+        },
+        {
+            "id": "could not parse given language",
+            "message": "could not parse given language",
+            "translation": "could not parse given language",
+            "translatorComment": "Copied from source.",
+            "fuzzy": true
+        },
+        {
+            "id": "invalid mail address",
+            "message": "invalid mail address",
+            "translation": "invalid mail address",
+            "translatorComment": "Copied from source.",
+            "fuzzy": true
+        },
+        {
+            "id": "password must have a length of at least 7",
+            "message": "password must have a length of at least 7",
+            "translation": "password must have a length of at least 7",
+            "translatorComment": "Copied from source.",
+            "fuzzy": true
+        },
+        {
+            "id": "roles cannot be assigned to users directly, use groups instead",
+            "message": "roles cannot be assigned to users directly, use groups instead",
+            "translation": "roles cannot be assigned to users directly, use groups instead",
+            "translatorComment": "Copied from source.",
+            "fuzzy": true
+        },
+        {
+            "id": "mail address not set",
+            "message": "mail address not set",
+            "translation": "mail address not set",
+            "translatorComment": "Copied from source.",
+            "fuzzy": true
+        },
+        {
+            "id": "not allowed to set confirmed",
+            "message": "not allowed to set confirmed",
+            "translation": "not allowed to set confirmed",
+            "translatorComment": "Copied from source.",
+            "fuzzy": true
+        },
+        {
+            "id": "unable to hash given password",
+            "message": "unable to hash given password",
+            "translation": "unable to hash given password",
+            "translatorComment": "Copied from source.",
+            "fuzzy": true
+        },
+        {
+            "id": "not allowed to edit other users",
+            "message": "not allowed to edit other users",
+            "translation": "not allowed to edit other users",
+            "translatorComment": "Copied from source.",
+            "fuzzy": true
+        },
+        {
+            "id": "roles cannot be assigned to users directly",
+            "message": "roles cannot be assigned to users directly",
+            "translation": "roles cannot be assigned to users directly",
+            "translatorComment": "Copied from source.",
+            "fuzzy": true
+        },
+        {
+            "id": "password cannot be changed using the UpdateUser function, use ChangePassword instead",
+            "message": "password cannot be changed using the UpdateUser function, use ChangePassword instead",
+            "translation": "password cannot be changed using the UpdateUser function, use ChangePassword instead",
+            "translatorComment": "Copied from source.",
+            "fuzzy": true
+        },
+        {
+            "id": "unable to merge users",
+            "message": "unable to merge users",
+            "translation": "unable to merge users",
+            "translatorComment": "Copied from source.",
+            "fuzzy": true
+        },
+        {
+            "id": "not allowed to delete user",
+            "message": "not allowed to delete user",
+            "translation": "not allowed to delete user",
+            "translatorComment": "Copied from source.",
+            "fuzzy": true
+        },
+        {
+            "id": "unable to remove user from group {Name}",
+            "message": "unable to remove user from group {Name}",
+            "translation": "unable to remove user from group {Name}",
+            "translatorComment": "Copied from source.",
+            "placeholders": [
+                {
+                    "id": "Name",
+                    "string": "%[1]s",
+                    "type": "string",
+                    "underlyingType": "string",
+                    "argNum": 1,
+                    "expr": "g.Name"
+                }
+            ],
+            "fuzzy": true
+        },
+        {
+            "id": "not allowed to change password for other users",
+            "message": "not allowed to change password for other users",
+            "translation": "not allowed to change password for other users",
+            "translatorComment": "Copied from source.",
+            "fuzzy": true
+        },
+        {
+            "id": "password mismatch",
+            "message": "password mismatch",
+            "translation": "password mismatch",
+            "translatorComment": "Copied from source.",
+            "fuzzy": true
+        },
+        {
+            "id": "unable to save user",
+            "message": "unable to save user",
+            "translation": "unable to save user",
+            "translatorComment": "Copied from source.",
+            "fuzzy": true
+        },
+        {
+            "id": "unable to send reset password mail",
+            "message": "unable to send reset password mail",
+            "translation": "unable to send reset password mail",
             "translatorComment": "Copied from source.",
             "fuzzy": true
         }

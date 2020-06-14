@@ -2,243 +2,24 @@
     "language": "de",
     "messages": [
         {
-            "id": "{SiteName}: confirm mail address",
-            "message": "{SiteName}: confirm mail address",
-            "translation": "{SiteName}: Mail-Adresse bestätigen",
-            "placeholders": [
-                {
-                    "id": "SiteName",
-                    "string": "%[1]s",
-                    "type": "string",
-                    "underlyingType": "string",
-                    "argNum": 1,
-                    "expr": "m.siteName"
-                }
-            ]
+            "id": "internal error while building filter",
+            "message": "internal error while building filter",
+            "translation": "Interner Fehler beim Erstellen des Filters"
         },
         {
-            "id": "Hi {Username}! Please confirm your mail address by clicking the following link. Thanks!\n{Link}",
-            "message": "Hi {Username}! Please confirm your mail address by clicking the following link. Thanks!\n{Link}",
-            "translation": "Hallo {Username}! Bitte bestätige deine Mail-Adresse, indem du auf den folgenden Link klickst. Danke!\n{Link} ",
-            "placeholders": [
-                {
-                    "id": "Username",
-                    "string": "%[1]s",
-                    "type": "string",
-                    "underlyingType": "string",
-                    "argNum": 1,
-                    "expr": "user.Username"
-                },
-                {
-                    "id": "Link",
-                    "string": "%[2]s",
-                    "type": "string",
-                    "underlyingType": "string",
-                    "argNum": 2,
-                    "expr": "link"
-                }
-            ]
+            "id": "orderBy field has a length of 0",
+            "message": "orderBy field has a length of 0",
+            "translation": "Sortierfeld hat eine Länge von 0"
         },
         {
-            "id": "error while sending mail: {Err}",
-            "message": "error while sending mail: {Err}",
-            "translation": "Fehler beim Versenden des Mails: {Err}",
-            "placeholders": [
-                {
-                    "id": "Err",
-                    "string": "%[1]s",
-                    "type": "error",
-                    "underlyingType": "interface{Error() string}",
-                    "argNum": 1,
-                    "expr": "err"
-                }
-            ]
+            "id": "unable to search next document while creating pagination token",
+            "message": "unable to search next document while creating pagination token",
+            "translation": "während dem Erstellen des Pagination-Tokens konnte das Folgedokument nicht abgefragt werden"
         },
         {
-            "id": "{SiteName}: password reset",
-            "message": "{SiteName}: password reset",
-            "translation": "{SiteName}: Passwort zurücksetzen",
-            "placeholders": [
-                {
-                    "id": "SiteName",
-                    "string": "%[1]s",
-                    "type": "string",
-                    "underlyingType": "string",
-                    "argNum": 1,
-                    "expr": "m.siteName"
-                }
-            ]
-        },
-        {
-            "id": "Hi {Username}! To reset your password, click the following link: \n{Link}\n\nIf you did not request to reset your password, please ignore this message. Thanks",
-            "message": "Hi {Username}! To reset your password, click the following link: \n{Link}\n\nIf you did not request to reset your password, please ignore this message. Thanks",
-            "translation": "Hallo {Username}! Um dein Passwort zurückzusetzen, klicke den folgenden Link: \n{Link}\n\nFalls du das zurücksetzen des Passworts nicht angefordert hast, bitte ignoriere diese Nachricht. Danke",
-            "placeholders": [
-                {
-                    "id": "Username",
-                    "string": "%[1]s",
-                    "type": "string",
-                    "underlyingType": "string",
-                    "argNum": 1,
-                    "expr": "user.Username"
-                },
-                {
-                    "id": "Link",
-                    "string": "%[2]s",
-                    "type": "string",
-                    "underlyingType": "string",
-                    "argNum": 2,
-                    "expr": "link"
-                }
-            ]
-        },
-        {
-            "id": "unable to create page token: {Err}",
-            "message": "unable to create page token: {Err}",
-            "translation": "Page Token konnte nicht erstellt werden: {Err}",
-            "placeholders": [
-                {
-                    "id": "Err",
-                    "string": "%[1]s",
-                    "type": "error",
-                    "underlyingType": "interface{Error() string}",
-                    "argNum": 1,
-                    "expr": "err"
-                }
-            ]
-        },
-        {
-            "id": "could not find group with id {Id}",
-            "message": "could not find group with id {Id}",
-            "translation": "Gruppe mit ID '{Id}' konnte nicht gefunden werden",
-            "placeholders": [
-                {
-                    "id": "Id",
-                    "string": "%[1]s",
-                    "type": "string",
-                    "underlyingType": "string",
-                    "argNum": 1,
-                    "expr": "req.GetId()"
-                }
-            ]
-        },
-        {
-            "id": "group name needs to have a length of at least 3",
-            "message": "group name needs to have a length of at least 3",
-            "translation": "Name der Gruppe sollte mindestens eine Länge von 3 aufweisen"
-        },
-        {
-            "id": "error while counting groups",
-            "message": "error while counting groups",
-            "translation": "Fehler beim Zählen der Gruppen"
-        },
-        {
-            "id": "unable to query members",
-            "message": "unable to query members",
-            "translation": "Mitglieder konnten nicht abgefragt werden"
-        },
-        {
-            "id": "only {Intsize} of {LenmemberIds} given memberIds were found",
-            "message": "only {Intsize} of {LenmemberIds} given memberIds were found",
-            "translation": "Nur {Intsize} der {LenmemberIds} Mitglieder wurden gefunden",
-            "placeholders": [
-                {
-                    "id": "Intsize",
-                    "string": "%[1]v",
-                    "type": "int",
-                    "underlyingType": "int",
-                    "argNum": 1,
-                    "expr": "int(size)"
-                },
-                {
-                    "id": "LenmemberIds",
-                    "string": "%[2]v",
-                    "type": "int",
-                    "underlyingType": "int",
-                    "argNum": 2,
-                    "expr": "len(memberIds)"
-                }
-            ]
-        },
-        {
-            "id": "error while looking up groups",
-            "message": "error while looking up groups",
-            "translation": "Fehler beim Agfragen der Gruppen"
-        },
-        {
-            "id": "error while querying member",
-            "message": "error while querying member",
-            "translation": "Fehler beim Abfragen des Mitglieds"
-        },
-        {
-            "id": "not allowed to create groups",
-            "message": "not allowed to create groups",
-            "translation": "Nicht berechtigt, Gruppen zu erstellen"
-        },
-        {
-            "id": "not allowed to update groups",
-            "message": "not allowed to update groups",
-            "translation": "Nicht berechtigt, Gruppen zu aktualisieren"
-        },
-        {
-            "id": "unable to create generate field mask: {Err}",
-            "message": "unable to create generate field mask: {Err}",
-            "translation": "Feldmaske konnte nicht erstellt werden: {Err}",
-            "placeholders": [
-                {
-                    "id": "Err",
-                    "string": "%[1]s",
-                    "type": "error",
-                    "underlyingType": "interface{Error() string}",
-                    "argNum": 1,
-                    "expr": "err"
-                }
-            ]
-        },
-        {
-            "id": "unable to merge groups",
-            "message": "unable to merge groups",
-            "translation": "Gruppen konnten nicht zusammengeführt werden"
-        },
-        {
-            "id": "not allowed to delete groups",
-            "message": "not allowed to delete groups",
-            "translation": "Nicht berechtigt, Gruppen zu löschen"
-        },
-        {
-            "id": "unable to marshal token to json: {Err}",
-            "message": "unable to marshal token to json: {Err}",
-            "translation": "Token kann nicht umgewandelt werden: {Err}",
-            "placeholders": [
-                {
-                    "id": "Err",
-                    "string": "%[1]s",
-                    "type": "error",
-                    "underlyingType": "interface{Error() string}",
-                    "argNum": 1,
-                    "expr": "err"
-                }
-            ]
-        },
-        {
-            "id": "invalid page token, unable to unmarshal to page token: {Err}",
-            "message": "invalid page token, unable to unmarshal to page token: {Err}",
-            "translation": "Ungültiger Page Token, Umwandlung nicht möglich: {Err}",
-            "placeholders": [
-                {
-                    "id": "Err",
-                    "string": "%[1]s",
-                    "type": "error",
-                    "underlyingType": "interface{Error() string}",
-                    "argNum": 1,
-                    "expr": "err"
-                }
-            ]
-        },
-        {
-            "id": "mismatch between given filter {Filter} and filter in page token {Filter_1}",
-            "message": "mismatch between given filter {Filter} and filter in page token {Filter_1}",
-            "translation": "Filter {Filter} stimmt nicht mit dem Filter {Filter_1} aus dem Page Token überein",
+            "id": "invalid rsql filter string '{Filter}': {Err}",
+            "message": "invalid rsql filter string '{Filter}': {Err}",
+            "translation": "ungültiger rsql Filter String '{Filter}': {Err}",
             "placeholders": [
                 {
                     "id": "Filter",
@@ -249,144 +30,44 @@
                     "expr": "filter"
                 },
                 {
-                    "id": "Filter_1",
+                    "id": "Err",
                     "string": "%[2]s",
-                    "type": "string",
-                    "underlyingType": "string",
+                    "type": "error",
+                    "underlyingType": "interface{Error() string}",
                     "argNum": 2,
-                    "expr": "t.Filter"
+                    "expr": "err"
                 }
             ]
         },
         {
-            "id": "could not find user with id {Id}",
-            "message": "could not find user with id {Id}",
-            "translation": "Benutzer mit id {Id} konnte nicht gefunden werden",
+            "id": "{S} has a length of 0",
+            "message": "{S} has a length of 0",
+            "translation": "{S} hat eine Länge von 0",
             "placeholders": [
                 {
-                    "id": "Id",
+                    "id": "S",
                     "string": "%[1]s",
                     "type": "string",
                     "underlyingType": "string",
                     "argNum": 1,
-                    "expr": "req.GetId()"
+                    "expr": "s"
                 }
             ]
         },
         {
-            "id": "invalid username, only lowercase letters and numbers are allowed",
-            "message": "invalid username, only lowercase letters and numbers are allowed",
-            "translation": "Ungüliger Benutzername, nur Kleinbuchstaben und Nummern sind erlaubt"
+            "id": "invalid page token given",
+            "message": "invalid page token given",
+            "translation": "Ungültiger Pagination Token erhalten"
         },
         {
-            "id": "could not parse given language",
-            "message": "could not parse given language",
-            "translation": "Sprache konnte nicht bestimmt werden"
+            "id": "pagination filter and given filters do not match",
+            "message": "pagination filter and given filters do not match",
+            "translation": "Pagination Filter und gegebener Filter stimmen nicht überein"
         },
         {
-            "id": "invalid mail address",
-            "message": "invalid mail address",
-            "translation": "Ungültige Mail Adresse"
-        },
-        {
-            "id": "error while counting users",
-            "message": "error while counting users",
-            "translation": "Fehler beim Zählen der Benutzer"
-        },
-        {
-            "id": "password must have a length of at least 7",
-            "message": "password must have a length of at least 7",
-            "translation": "Das Passwort muss mindestens eine Länge von 7 aufweisen"
-        },
-        {
-            "id": "roles cannot be assigned to users directly, use groups instead",
-            "message": "roles cannot be assigned to users directly, use groups instead",
-            "translation": "Rollen können nicht direkt Benutzern zugewiesen werden, verwende Gruppen dazu"
-        },
-        {
-            "id": "mail address not set",
-            "message": "mail address not set",
-            "translation": "Mail Adresse nicht gegeben"
-        },
-        {
-            "id": "not allowed to set confirmed",
-            "message": "not allowed to set confirmed",
-            "translation": "Bestätigt darf nicht gesetzt werden"
-        },
-        {
-            "id": "unable to hash given password",
-            "message": "unable to hash given password",
-            "translation": "Es konnte kein Hash für das Passwort erstellt werden"
-        },
-        {
-            "id": "not allowed to edit other users",
-            "message": "not allowed to edit other users",
-            "translation": "Keine Berechtigung um andere Benutzer zu bearbeiten"
-        },
-        {
-            "id": "roles cannot be assigned to users directly",
-            "message": "roles cannot be assigned to users directly",
-            "translation": "Rollen können nicht direkt Benutzern zugeordnet werden"
-        },
-        {
-            "id": "password cannot be changed using the UpdateUser function, use ChangePassword instead",
-            "message": "password cannot be changed using the UpdateUser function, use ChangePassword instead",
-            "translation": "Passwort kann nicht mit der UpdateUser Funktion aktualisiert werden, verwende die ChangePassword Funktion stattdessen"
-        },
-        {
-            "id": "unable to merge users",
-            "message": "unable to merge users",
-            "translation": "Benutzer können nicht zusammengeführt werden"
-        },
-        {
-            "id": "not allowed to delete user",
-            "message": "not allowed to delete user",
-            "translation": "Keine Berechtigung um Benutzer zu löschen"
-        },
-        {
-            "id": "unable to remove user from group {Name}",
-            "message": "unable to remove user from group {Name}",
-            "translation": "Benutzer kann nicht von Gruppe entfernt werden",
-            "placeholders": [
-                {
-                    "id": "Name",
-                    "string": "%[1]s",
-                    "type": "string",
-                    "underlyingType": "string",
-                    "argNum": 1,
-                    "expr": "g.Name"
-                }
-            ]
-        },
-        {
-            "id": "not allowed to change password for other users",
-            "message": "not allowed to change password for other users",
-            "translation": "Keine Berechtigungen um das Passwort anderer Benutzer zu ändern"
-        },
-        {
-            "id": "password mismatch",
-            "message": "password mismatch",
-            "translation": "Passwort stimmt nicht überein"
-        },
-        {
-            "id": "unable to save user",
-            "message": "unable to save user",
-            "translation": "Benutzer kann nicht gespeichert werden"
-        },
-        {
-            "id": "unable to send reset password mail",
-            "message": "unable to send reset password mail",
-            "translation": "Passwort Reset Mail konnte nicht versandt werden"
-        },
-        {
-            "id": "no token given",
-            "message": "no token given",
-            "translation": "Kein Token angegeben"
-        },
-        {
-            "id": "invalid token",
-            "message": "invalid token",
-            "translation": "ungültiger Token"
+            "id": "pagination orderBy and given orderBy do not match",
+            "message": "pagination orderBy and given orderBy do not match",
+            "translation": "Pagination Sortierung und gegebene Sortierung stimmen nicht überein"
         },
         {
             "id": "the request was canceled by the client",
@@ -394,32 +75,32 @@
             "translation": "die Anfrage wurde vom Client abgebrochen"
         },
         {
-            "id": "unable to count groups: {Err}",
-            "message": "unable to count groups: {Err}",
-            "translation": "Gruppen können nicht gezählt werden: {Err}",
+            "id": "unable to count {Name}",
+            "message": "unable to count {Name}",
+            "translation": "Fehler beim Zählen von {Name}",
             "placeholders": [
                 {
-                    "id": "Err",
+                    "id": "Name",
                     "string": "%[1]s",
-                    "type": "error",
-                    "underlyingType": "interface{Error() string}",
+                    "type": "string",
+                    "underlyingType": "string",
                     "argNum": 1,
-                    "expr": "err"
+                    "expr": "collection.Name()"
                 }
             ]
         },
         {
-            "id": "unable to query groups: {Err}",
-            "message": "unable to query groups: {Err}",
-            "translation": "Gruppen können nicht abgefragt werden: {Err}",
+            "id": "error while querying {Name}",
+            "message": "error while querying {Name}",
+            "translation": "Fehler beim Abfragen von {Name}",
             "placeholders": [
                 {
-                    "id": "Err",
+                    "id": "Name",
                     "string": "%[1]s",
-                    "type": "error",
-                    "underlyingType": "interface{Error() string}",
+                    "type": "string",
+                    "underlyingType": "string",
                     "argNum": 1,
-                    "expr": "err"
+                    "expr": "collection.Name()"
                 }
             ]
         },
@@ -437,6 +118,11 @@
                     "expr": "err"
                 }
             ]
+        },
+        {
+            "id": "unable to count groups",
+            "message": "unable to count groups",
+            "translation": "Gruppen konnten nicht gezählt werden"
         },
         {
             "id": "invalid id '{Id}'",
@@ -549,9 +235,19 @@
             ]
         },
         {
+            "id": "no token given",
+            "message": "no token given",
+            "translation": "Kein Token angegeben"
+        },
+        {
             "id": "token mismatch",
             "message": "token mismatch",
             "translation": "Token stimmt nicht überein"
+        },
+        {
+            "id": "invalid token",
+            "message": "invalid token",
+            "translation": "ungültiger Token"
         },
         {
             "id": "unable to json marshal reset password struct: {Err}",
@@ -584,36 +280,6 @@
             ]
         },
         {
-            "id": "unable to count users: {Err}",
-            "message": "unable to count users: {Err}",
-            "translation": "Benutzer konnten nicht gezählt werden: {Err}",
-            "placeholders": [
-                {
-                    "id": "Err",
-                    "string": "%[1]s",
-                    "type": "error",
-                    "underlyingType": "interface{Error() string}",
-                    "argNum": 1,
-                    "expr": "err"
-                }
-            ]
-        },
-        {
-            "id": "unable to query users: {Err}",
-            "message": "unable to query users: {Err}",
-            "translation": "Benutzer konnten nicht abgefragt werden: {Err}",
-            "placeholders": [
-                {
-                    "id": "Err",
-                    "string": "%[1]s",
-                    "type": "error",
-                    "underlyingType": "interface{Error() string}",
-                    "argNum": 1,
-                    "expr": "err"
-                }
-            ]
-        },
-        {
             "id": "unable to decode user: {Err}",
             "message": "unable to decode user: {Err}",
             "translation": "Benutzer konnten nicht dekodiert werden: {Err}",
@@ -627,6 +293,11 @@
                     "expr": "err"
                 }
             ]
+        },
+        {
+            "id": "unable to count users",
+            "message": "unable to count users",
+            "translation": "Benutzer konnten nicht gezählt werden"
         },
         {
             "id": "unable to find user with id {Id}",
@@ -677,6 +348,300 @@
             "id": "unable to find user with given id",
             "message": "unable to find user with given id",
             "translation": "Benutzer mit der gegebenen ID konnte nicht gefunden werden"
+        },
+        {
+            "id": "{SiteName}: confirm mail address",
+            "message": "{SiteName}: confirm mail address",
+            "translation": "{SiteName}: Mail-Adresse bestätigen",
+            "placeholders": [
+                {
+                    "id": "SiteName",
+                    "string": "%[1]s",
+                    "type": "string",
+                    "underlyingType": "string",
+                    "argNum": 1,
+                    "expr": "m.siteName"
+                }
+            ]
+        },
+        {
+            "id": "Hi {Username}! Please confirm your mail address by clicking the following link. Thanks!\n{Link}",
+            "message": "Hi {Username}! Please confirm your mail address by clicking the following link. Thanks!\n{Link}",
+            "translation": "Hallo {Username}! Bitte bestätige deine Mail-Adresse, indem du auf den folgenden Link klickst. Danke!\n{Link} ",
+            "placeholders": [
+                {
+                    "id": "Username",
+                    "string": "%[1]s",
+                    "type": "string",
+                    "underlyingType": "string",
+                    "argNum": 1,
+                    "expr": "user.Username"
+                },
+                {
+                    "id": "Link",
+                    "string": "%[2]s",
+                    "type": "string",
+                    "underlyingType": "string",
+                    "argNum": 2,
+                    "expr": "link"
+                }
+            ]
+        },
+        {
+            "id": "error while sending mail: {Err}",
+            "message": "error while sending mail: {Err}",
+            "translation": "Fehler beim Versenden des Mails: {Err}",
+            "placeholders": [
+                {
+                    "id": "Err",
+                    "string": "%[1]s",
+                    "type": "error",
+                    "underlyingType": "interface{Error() string}",
+                    "argNum": 1,
+                    "expr": "err"
+                }
+            ]
+        },
+        {
+            "id": "{SiteName}: password reset",
+            "message": "{SiteName}: password reset",
+            "translation": "{SiteName}: Passwort zurücksetzen",
+            "placeholders": [
+                {
+                    "id": "SiteName",
+                    "string": "%[1]s",
+                    "type": "string",
+                    "underlyingType": "string",
+                    "argNum": 1,
+                    "expr": "m.siteName"
+                }
+            ]
+        },
+        {
+            "id": "Hi {Username}! To reset your password, click the following link: \n{Link}\n\nIf you did not request to reset your password, please ignore this message. Thanks",
+            "message": "Hi {Username}! To reset your password, click the following link: \n{Link}\n\nIf you did not request to reset your password, please ignore this message. Thanks",
+            "translation": "Hallo {Username}! Um dein Passwort zurückzusetzen, klicke den folgenden Link: \n{Link}\n\nFalls du das zurücksetzen des Passworts nicht angefordert hast, bitte ignoriere diese Nachricht. Danke",
+            "placeholders": [
+                {
+                    "id": "Username",
+                    "string": "%[1]s",
+                    "type": "string",
+                    "underlyingType": "string",
+                    "argNum": 1,
+                    "expr": "user.Username"
+                },
+                {
+                    "id": "Link",
+                    "string": "%[2]s",
+                    "type": "string",
+                    "underlyingType": "string",
+                    "argNum": 2,
+                    "expr": "link"
+                }
+            ]
+        },
+        {
+            "id": "could not find group with id {Id}",
+            "message": "could not find group with id {Id}",
+            "translation": "Gruppe mit ID '{Id}' konnte nicht gefunden werden",
+            "placeholders": [
+                {
+                    "id": "Id",
+                    "string": "%[1]s",
+                    "type": "string",
+                    "underlyingType": "string",
+                    "argNum": 1,
+                    "expr": "req.GetId()"
+                }
+            ]
+        },
+        {
+            "id": "group name needs to have a length of at least 3",
+            "message": "group name needs to have a length of at least 3",
+            "translation": "Name der Gruppe sollte mindestens eine Länge von 3 aufweisen"
+        },
+        {
+            "id": "unable to query members",
+            "message": "unable to query members",
+            "translation": "Mitglieder konnten nicht abgefragt werden"
+        },
+        {
+            "id": "only {Intsize} of {LenmemberIds} given memberIds were found",
+            "message": "only {Intsize} of {LenmemberIds} given memberIds were found",
+            "translation": "Nur {Intsize} der {LenmemberIds} Mitglieder wurden gefunden",
+            "placeholders": [
+                {
+                    "id": "Intsize",
+                    "string": "%[1]v",
+                    "type": "int",
+                    "underlyingType": "int",
+                    "argNum": 1,
+                    "expr": "int(size)"
+                },
+                {
+                    "id": "LenmemberIds",
+                    "string": "%[2]v",
+                    "type": "int",
+                    "underlyingType": "int",
+                    "argNum": 2,
+                    "expr": "len(memberIds)"
+                }
+            ]
+        },
+        {
+            "id": "error while querying member",
+            "message": "error while querying member",
+            "translation": "Fehler beim Abfragen des Mitglieds"
+        },
+        {
+            "id": "not allowed to create groups",
+            "message": "not allowed to create groups",
+            "translation": "Nicht berechtigt, Gruppen zu erstellen"
+        },
+        {
+            "id": "not allowed to update groups",
+            "message": "not allowed to update groups",
+            "translation": "Nicht berechtigt, Gruppen zu aktualisieren"
+        },
+        {
+            "id": "unable to create generate field mask: {Err}",
+            "message": "unable to create generate field mask: {Err}",
+            "translation": "Feldmaske konnte nicht erstellt werden: {Err}",
+            "placeholders": [
+                {
+                    "id": "Err",
+                    "string": "%[1]s",
+                    "type": "error",
+                    "underlyingType": "interface{Error() string}",
+                    "argNum": 1,
+                    "expr": "err"
+                }
+            ]
+        },
+        {
+            "id": "unable to merge groups",
+            "message": "unable to merge groups",
+            "translation": "Gruppen konnten nicht zusammengeführt werden"
+        },
+        {
+            "id": "not allowed to delete groups",
+            "message": "not allowed to delete groups",
+            "translation": "Nicht berechtigt, Gruppen zu löschen"
+        },
+        {
+            "id": "could not find user with id {Id}",
+            "message": "could not find user with id {Id}",
+            "translation": "Benutzer mit id {Id} konnte nicht gefunden werden",
+            "placeholders": [
+                {
+                    "id": "Id",
+                    "string": "%[1]s",
+                    "type": "string",
+                    "underlyingType": "string",
+                    "argNum": 1,
+                    "expr": "req.GetId()"
+                }
+            ]
+        },
+        {
+            "id": "invalid username, only lowercase letters and numbers are allowed",
+            "message": "invalid username, only lowercase letters and numbers are allowed",
+            "translation": "Ungüliger Benutzername, nur Kleinbuchstaben und Nummern sind erlaubt"
+        },
+        {
+            "id": "could not parse given language",
+            "message": "could not parse given language",
+            "translation": "Sprache konnte nicht bestimmt werden"
+        },
+        {
+            "id": "invalid mail address",
+            "message": "invalid mail address",
+            "translation": "Ungültige Mail Adresse"
+        },
+        {
+            "id": "password must have a length of at least 7",
+            "message": "password must have a length of at least 7",
+            "translation": "Das Passwort muss mindestens eine Länge von 7 aufweisen"
+        },
+        {
+            "id": "roles cannot be assigned to users directly, use groups instead",
+            "message": "roles cannot be assigned to users directly, use groups instead",
+            "translation": "Rollen können nicht direkt Benutzern zugewiesen werden, verwende Gruppen dazu"
+        },
+        {
+            "id": "mail address not set",
+            "message": "mail address not set",
+            "translation": "Mail Adresse nicht gegeben"
+        },
+        {
+            "id": "not allowed to set confirmed",
+            "message": "not allowed to set confirmed",
+            "translation": "Bestätigt darf nicht gesetzt werden"
+        },
+        {
+            "id": "unable to hash given password",
+            "message": "unable to hash given password",
+            "translation": "Es konnte kein Hash für das Passwort erstellt werden"
+        },
+        {
+            "id": "not allowed to edit other users",
+            "message": "not allowed to edit other users",
+            "translation": "Keine Berechtigung um andere Benutzer zu bearbeiten"
+        },
+        {
+            "id": "roles cannot be assigned to users directly",
+            "message": "roles cannot be assigned to users directly",
+            "translation": "Rollen können nicht direkt Benutzern zugeordnet werden"
+        },
+        {
+            "id": "password cannot be changed using the UpdateUser function, use ChangePassword instead",
+            "message": "password cannot be changed using the UpdateUser function, use ChangePassword instead",
+            "translation": "Passwort kann nicht mit der UpdateUser Funktion aktualisiert werden, verwende die ChangePassword Funktion stattdessen"
+        },
+        {
+            "id": "unable to merge users",
+            "message": "unable to merge users",
+            "translation": "Benutzer können nicht zusammengeführt werden"
+        },
+        {
+            "id": "not allowed to delete user",
+            "message": "not allowed to delete user",
+            "translation": "Keine Berechtigung um Benutzer zu löschen"
+        },
+        {
+            "id": "unable to remove user from group {Name}",
+            "message": "unable to remove user from group {Name}",
+            "translation": "Benutzer kann nicht von Gruppe entfernt werden",
+            "placeholders": [
+                {
+                    "id": "Name",
+                    "string": "%[1]s",
+                    "type": "string",
+                    "underlyingType": "string",
+                    "argNum": 1,
+                    "expr": "g.Name"
+                }
+            ]
+        },
+        {
+            "id": "not allowed to change password for other users",
+            "message": "not allowed to change password for other users",
+            "translation": "Keine Berechtigungen um das Passwort anderer Benutzer zu ändern"
+        },
+        {
+            "id": "password mismatch",
+            "message": "password mismatch",
+            "translation": "Passwort stimmt nicht überein"
+        },
+        {
+            "id": "unable to save user",
+            "message": "unable to save user",
+            "translation": "Benutzer kann nicht gespeichert werden"
+        },
+        {
+            "id": "unable to send reset password mail",
+            "message": "unable to send reset password mail",
+            "translation": "Passwort Reset Mail konnte nicht versandt werden"
         }
     ]
 }

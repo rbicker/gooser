@@ -4,7 +4,6 @@ import (
 	"context"
 	"testing"
 
-	"golang.org/x/text/language"
 	"golang.org/x/text/message"
 
 	"github.com/rbicker/gooser/internal/mocks"
@@ -22,7 +21,6 @@ import (
 
 func (suite *Suite) TestListGroups() {
 	t := suite.T()
-	printer := message.NewPrinter(language.English)
 	// client connection
 	conn, err := suite.NewClientConnection(nil)
 	if err != nil {
@@ -30,23 +28,18 @@ func (suite *Suite) TestListGroups() {
 	}
 	defer conn.Close()
 	client := gooserv1.NewGooserClient(conn)
-	// test page token
-	pageTokenString, err := EncodePageToken(printer, &PageToken{
-		Filter: "name==admins",
-		Skip:   3,
-	})
 	if err != nil {
 		t.Fatalf("error while creating page token: %s", err)
 	}
 	// tests
 	tests := []struct {
-		name          string
-		prepare       func(db *mocks.Store)
-		accessToken   string
-		req           *gooserv1.ListRequest
-		wantCode      codes.Code
-		wantLen       int
-		wantPageToken *PageToken
+		name              string
+		prepare           func(db *mocks.Store)
+		accessToken       string
+		req               *gooserv1.ListRequest
+		wantCode          codes.Code
+		wantLen           int
+		wantNextPageToken string
 	}{
 		{
 			name:        "unauthenticated",
@@ -57,13 +50,13 @@ func (suite *Suite) TestListGroups() {
 			wantCode: codes.Unauthenticated,
 		},
 		{
-			name:        "list limited",
+			name:        "list groups",
 			accessToken: "user",
 			req: &gooserv1.ListRequest{
 				PageSize: 1,
 			},
 			prepare: func(db *mocks.Store) {
-				db.On("ListGroups", mock.Anything, mock.Anything, "", int32(1), int32(0)).Return(
+				db.On("ListGroups", mock.Anything, mock.Anything, "", "", "", int32(1)).Return(
 					&[]store.Group{
 						{
 							Id:      "testers",
@@ -73,54 +66,13 @@ func (suite *Suite) TestListGroups() {
 						},
 					},
 					int32(5),
+					"token",
 					nil,
 				).Once()
 			},
-			wantCode: codes.OK,
-			wantLen:  1,
-			wantPageToken: &PageToken{
-				Filter: "",
-				Skip:   1,
-			},
-		},
-		{
-			name:        "page token",
-			accessToken: "user",
-			req: &gooserv1.ListRequest{
-				PageSize:  1,
-				PageToken: pageTokenString,
-				Filter:    "name==admins",
-			},
-			prepare: func(db *mocks.Store) {
-				db.On("ListGroups", mock.Anything, mock.Anything, "name==admins", int32(1), int32(3)).Return(
-					&[]store.Group{
-						{
-							Id:      "testers",
-							Name:    "testers",
-							Roles:   []string{"tester"},
-							Members: []string{"user"},
-						},
-					},
-					int32(5),
-					nil,
-				).Once()
-			},
-			wantCode: codes.OK,
-			wantLen:  1,
-			wantPageToken: &PageToken{
-				Filter: "name==admins",
-				Skip:   4,
-			},
-		},
-		{
-			name:        "page token with filter mismatch",
-			accessToken: "user",
-			req: &gooserv1.ListRequest{
-				PageSize:  1,
-				PageToken: pageTokenString,
-				Filter:    "name==changed",
-			},
-			wantCode: codes.InvalidArgument,
+			wantCode:          codes.OK,
+			wantLen:           1,
+			wantNextPageToken: "token",
 		},
 	}
 	for _, tt := range tests {
@@ -150,8 +102,7 @@ func (suite *Suite) TestListGroups() {
 			}
 			// check result
 			assert.Equal(tt.wantLen, len(res.Groups), "length mismatch")
-			token, _ := DecodePageToken(printer, res.GetNextPageToken(), tt.req.GetFilter())
-			assert.Equal(tt.wantPageToken, token)
+			assert.Equal(tt.wantNextPageToken, res.NextPageToken, "token missmatch")
 		})
 	}
 }
@@ -312,12 +263,11 @@ func (suite *Suite) TestCreateGroup() {
 			},
 			prepare: func(db *mocks.Store) {
 				// checking for existing group
-				db.On("ListGroups", mock.Anything, mock.Anything, `(name=="testers")`, mock.Anything, mock.Anything).Return(
-					nil,
+				db.On("CountGroups", mock.Anything, mock.Anything, `(name=="testers")`).Return(
 					int32(0),
 					nil,
 				).Once()
-				db.On("ListUsers", mock.Anything, mock.Anything, `_id=oid=("user1","user2")`, mock.Anything, mock.Anything).Return(
+				db.On("ListUsers", mock.Anything, mock.Anything, `_id=oid=("user1","user2")`, mock.Anything, mock.Anything, "mock.Anything").Return(
 					&[]store.User{
 						{
 							Id:       "user1",
@@ -331,6 +281,7 @@ func (suite *Suite) TestCreateGroup() {
 						},
 					},
 					int32(2), // size
+					"",       // next token
 					nil,      // error
 				).Once()
 				db.On("SaveGroup", mock.Anything, mock.Anything, mock.Anything).Return(
@@ -365,13 +316,7 @@ func (suite *Suite) TestCreateGroup() {
 			},
 			prepare: func(db *mocks.Store) {
 				// checking for existing group
-				db.On("ListGroups", mock.Anything, mock.Anything, `(name=="testers")`, mock.Anything, mock.Anything).Return(
-					&[]store.Group{
-						{
-							Id:   "testers",
-							Name: "testers",
-						},
-					},
+				db.On("CountGroups", mock.Anything, mock.Anything, `(name=="testers")`).Return(
 					int32(1),
 					nil,
 				).Once()
@@ -389,12 +334,11 @@ func (suite *Suite) TestCreateGroup() {
 			},
 			prepare: func(db *mocks.Store) {
 				// checking for existing group
-				db.On("ListGroups", mock.Anything, mock.Anything, `(name=="testers")`, mock.Anything, mock.Anything).Return(
-					nil,
+				db.On("CountGroups", mock.Anything, mock.Anything, `(name=="testers")`).Return(
 					int32(0),
 					nil,
 				).Once()
-				db.On("ListUsers", mock.Anything, mock.Anything, `_id=oid=("user1","user2")`, mock.Anything, mock.Anything).Return(
+				db.On("ListUsers", mock.Anything, mock.Anything, `_id=oid=("user1","user2")`, mock.Anything, mock.Anything, mock.Anything).Return(
 					&[]store.User{
 						{
 							Id:       "user1",
@@ -403,6 +347,7 @@ func (suite *Suite) TestCreateGroup() {
 						},
 					},
 					int32(1), // size
+					"",       // token
 					nil,      // error
 				).Once()
 			},
@@ -524,19 +469,17 @@ func (suite *Suite) TestUpdateGroup() {
 					},
 					nil).Twice()
 				// checking for existing group
-				db.On("ListGroups", mock.Anything, mock.Anything, `(_id!oid="testers");(name=="validators")`, mock.Anything, mock.Anything).Return(
-					nil,
+				db.On("CountGroups", mock.Anything, mock.Anything, `(_id!oid="testers");(name=="validators")`).Return(
 					int32(0),
 					nil,
 				).Once()
 				// while querying roles for removed members + while querying removed members
-				db.On("ListGroups", mock.Anything, mock.Anything, `_id!oid="testers";members=="user1";roles=="tester"`, mock.Anything, mock.Anything).Return(
-					nil,
+				db.On("CountGroups", mock.Anything, mock.Anything, `_id!oid="testers";members=="user1";roles=="tester"`).Return(
 					int32(0), // size
 					nil,      // error
 				).Twice()
 				// while querying added roles + while querying added members
-				db.On("ListUsers", mock.Anything, mock.Anything, `_id=oid=("user2")`, mock.Anything, mock.Anything).Return(
+				db.On("ListUsers", mock.Anything, mock.Anything, `_id=oid=("user2")`, mock.Anything, mock.Anything, mock.Anything).Return(
 					&[]store.User{
 						{
 							Id:       "user2",
@@ -545,6 +488,7 @@ func (suite *Suite) TestUpdateGroup() {
 						},
 					},
 					int32(1), // size
+					"",       // token
 					nil,      // error
 				).Twice()
 				db.On("SaveGroup", mock.Anything, mock.Anything, mock.Anything).Return(
@@ -671,20 +615,12 @@ func (suite *Suite) TestDeleteGroup() {
 					},
 					nil).Once()
 				// checking if there is another group providing the tester role
-				db.On("ListGroups", mock.Anything, mock.Anything, `_id!oid="testers";members=="user1";roles=="tester"`, mock.Anything, mock.Anything).Return(
-					nil,
+				db.On("CountGroups", mock.Anything, mock.Anything, `_id!oid="testers";members=="user1";roles=="tester"`).Return(
 					int32(0), // size
 					nil,      // error
 				).Once()
 				// checking if there is another group providing the worker role
-				db.On("ListGroups", mock.Anything, mock.Anything, `_id!oid="testers";members=="user1";roles=="worker"`, mock.Anything, mock.Anything).Return(
-					&[]store.Group{
-						{
-							Id:    "workers",
-							Name:  "workers",
-							Roles: []string{"worker"},
-						},
-					},
+				db.On("CountGroups", mock.Anything, mock.Anything, `_id!oid="testers";members=="user1";roles=="worker"`).Return(
 					int32(1), // size
 					nil,      // error
 				).Once()

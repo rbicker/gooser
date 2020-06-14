@@ -16,37 +16,62 @@ import (
 
 // ListUsers lists users from the mongo db.
 // It returns the documents, the total size of documents for the given filter and a grpc status type error if anything goes wrong.
-func (m *MGO) ListUsers(ctx context.Context, printer *message.Printer, filter string, size, skip int32) (*[]User, int32, error) {
-	query, err := m.BsonDocFromRsqlString(filter)
+func (m *MGO) ListUsers(ctx context.Context, printer *message.Printer, filterString, orderBy, token string, size int32) (users *[]User, totalSize int32, nextToken string, err error) {
+	cur, total, err := m.queryDocuments(
+		ctx,
+		printer,
+		m.usersCollection,
+		filterString,
+		orderBy,
+		token,
+		size,
+	)
 	if err != nil {
-		return nil, 0, err
-	}
-	if ctx.Err() == context.Canceled {
-		return nil, 0, status.Errorf(codes.Canceled, printer.Sprintf("the request was canceled by the client"))
-	}
-	count, err := m.usersCollection.CountDocuments(ctx, query, nil)
-	if err != nil {
-		return nil, 0, status.Errorf(codes.Internal, printer.Sprintf("unable to count users: %s", err))
-	}
-	findOptions := options.Find()
-	findOptions.SetLimit(int64(size))
-	findOptions.SetSkip(int64(skip))
-	findOptions.SetSort(bson.D{{"username", 1}})
-	cur, err := m.usersCollection.Find(ctx, query, findOptions)
-	if err != nil {
-		return nil, 0, status.Errorf(codes.Internal, printer.Sprintf("unable to query users: %s", err))
+		return nil, 0, "", err
 	}
 	defer cur.Close(ctx)
-	var users []User
+	var u User
+
 	for cur.Next(ctx) {
-		var u User
 		err = cur.Decode(&u)
 		if err != nil {
-			return nil, 0, status.Errorf(codes.Internal, printer.Sprintf("unable to decode user: %s", err))
+			return nil, 0, "", status.Errorf(codes.Internal, printer.Sprintf("unable to decode user: %s", err))
 		}
-		users = append(users, u)
+		*users = append(*users, u)
 	}
-	return &users, int32(count), nil
+	// if there might be more results
+	l := int32(len(*users))
+	if size == l && totalSize > l {
+		nextToken, err = m.NextPageToken(
+			ctx,
+			printer,
+			m.usersCollection,
+			filterString,
+			orderBy,
+			u,
+		)
+		if err != nil {
+			return nil, 0, "", err
+		}
+	}
+	return users, total, nextToken, err
+}
+
+// CountUsers returns the number of user documents corresponding to the given filter.
+func (m *MGO) CountUsers(ctx context.Context, printer *message.Printer, filterString string) (int32, error) {
+	filter, err := m.bsonDocFromRsqlString(printer, filterString)
+	if err != nil {
+		return 0, err
+	}
+	count, err := m.usersCollection.CountDocuments(ctx, filter, nil)
+	if err != nil {
+		if err == mongo.ErrNoDocuments {
+			return 0, nil
+		}
+		m.errorLogger.Printf("unable to count users: %s", err)
+		return 0, status.Errorf(codes.Internal, printer.Sprintf("unable to count users"))
+	}
+	return int32(count), nil
 }
 
 // GetUser gets the user with the given id from the mongo db.

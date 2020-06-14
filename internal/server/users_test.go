@@ -30,23 +30,18 @@ func (suite *Suite) TestListUsers() {
 	defer conn.Close()
 	client := gooserv1.NewGooserClient(conn)
 	// test page token
-	printer := message.NewPrinter(language.English)
-	pageTokenString, err := EncodePageToken(printer, &PageToken{
-		Filter: "roles==tester",
-		Skip:   3,
-	})
 	if err != nil {
 		t.Fatalf("error while creating page token: %s", err)
 	}
 	// tests
 	tests := []struct {
-		name          string
-		prepare       func(db *mocks.Store)
-		accessToken   string
-		req           *gooserv1.ListRequest
-		wantCode      codes.Code
-		wantLen       int
-		wantPageToken *PageToken
+		name              string
+		prepare           func(db *mocks.Store)
+		accessToken       string
+		req               *gooserv1.ListRequest
+		wantCode          codes.Code
+		wantLen           int
+		wantNextPageToken string
 	}{
 		{
 			name:        "unauthenticated",
@@ -57,13 +52,13 @@ func (suite *Suite) TestListUsers() {
 			wantCode: codes.Unauthenticated,
 		},
 		{
-			name:        "list limited",
+			name:        "list users",
 			accessToken: "user",
 			req: &gooserv1.ListRequest{
 				PageSize: 1,
 			},
 			prepare: func(db *mocks.Store) {
-				db.On("ListUsers", mock.Anything, mock.Anything, "", int32(1), int32(0)).Return(
+				db.On("ListUsers", mock.Anything, mock.Anything, "", "", "", int32(1)).Return(
 					&[]store.User{
 						{
 							Id:       "user1",
@@ -71,53 +66,13 @@ func (suite *Suite) TestListUsers() {
 						},
 					},
 					int32(5),
+					"token",
 					nil,
 				).Once()
 			},
-			wantCode: codes.OK,
-			wantLen:  1,
-			wantPageToken: &PageToken{
-				Filter: "",
-				Skip:   1,
-			},
-		},
-		{
-			name:        "page token",
-			accessToken: "user",
-			req: &gooserv1.ListRequest{
-				PageSize:  1,
-				PageToken: pageTokenString,
-				Filter:    "roles==tester",
-			},
-			prepare: func(db *mocks.Store) {
-				db.On("ListUsers", mock.Anything, mock.Anything, "roles==tester", int32(1), int32(3)).Return(
-					&[]store.User{
-						{
-							Id:       "user1",
-							Username: "user1",
-							Roles:    []string{"tester"},
-						},
-					},
-					int32(5),
-					nil,
-				).Once()
-			},
-			wantCode: codes.OK,
-			wantLen:  1,
-			wantPageToken: &PageToken{
-				Filter: "roles==tester",
-				Skip:   4,
-			},
-		},
-		{
-			name:        "page token with filter mismatch",
-			accessToken: "user",
-			req: &gooserv1.ListRequest{
-				PageSize:  1,
-				PageToken: pageTokenString,
-				Filter:    "roles==admin",
-			},
-			wantCode: codes.InvalidArgument,
+			wantCode:          codes.OK,
+			wantLen:           1,
+			wantNextPageToken: "token",
 		},
 	}
 	for _, tt := range tests {
@@ -147,8 +102,7 @@ func (suite *Suite) TestListUsers() {
 			}
 			// check result
 			assert.Equal(tt.wantLen, len(res.Users), "length mismatch")
-			token, _ := DecodePageToken(printer, res.GetNextPageToken(), tt.req.GetFilter())
-			assert.Equal(tt.wantPageToken, token)
+			assert.Equal(tt.wantNextPageToken, res.NextPageToken, "next page token mismatch")
 		})
 	}
 }
@@ -352,14 +306,7 @@ func (suite *Suite) TestCreateUser() {
 				Password: "password1234",
 			},
 			prepare: func(db *mocks.Store, mailer *mocks.Messenger) {
-				db.On("ListUsers", mock.Anything, mock.Anything, `username=="user1",mail=="new@testing.com"`, int32(1), int32(0)).Return(
-					&[]store.User{
-						{
-							Id:       "user1",
-							Username: "user1",
-							Mail:     "user1@testing.com",
-						},
-					},
+				db.On("CountUsers", mock.Anything, mock.Anything, `username=="user1",mail=="new@testing.com"`).Return(
 					int32(1),
 					nil,
 				).Once()
@@ -374,8 +321,7 @@ func (suite *Suite) TestCreateUser() {
 				Password: "password1234",
 			},
 			prepare: func(db *mocks.Store, mailer *mocks.Messenger) {
-				db.On("ListUsers", mock.Anything, mock.Anything, `username=="new",mail=="new@testing.com"`, int32(1), int32(0)).Return(
-					nil,
+				db.On("CountUsers", mock.Anything, mock.Anything, `username=="new",mail=="new@testing.com"`).Return(
 					int32(0),
 					nil,
 				).Once()
@@ -402,8 +348,7 @@ func (suite *Suite) TestCreateUser() {
 				Confirmed: true,
 			},
 			prepare: func(db *mocks.Store, mailer *mocks.Messenger) {
-				db.On("ListUsers", mock.Anything, mock.Anything, `username=="new",mail=="new@testing.com"`, int32(1), int32(0)).Return(
-					nil,
+				db.On("CountUsers", mock.Anything, mock.Anything, `username=="new",mail=="new@testing.com"`).Return(
 					int32(0),
 					nil,
 				).Once()
@@ -559,8 +504,7 @@ func (suite *Suite) TestUpdateUser() {
 						}
 					},
 					nil).Once()
-				db.On("ListUsers", mock.Anything, mock.Anything, `(_id!oid="user1");(username=="new",mail=="new@testing.com")`, int32(1), int32(0)).Return(
-					nil,
+				db.On("CountUsers", mock.Anything, mock.Anything, `(_id!oid="user1");(username=="new",mail=="new@testing.com")`).Return(
 					int32(0),
 					nil,
 				).Once()
@@ -604,8 +548,7 @@ func (suite *Suite) TestUpdateUser() {
 						}
 					},
 					nil).Once()
-				db.On("ListUsers", mock.Anything, mock.Anything, `(_id!oid="user1");(username=="new",mail=="new@testing.com")`, int32(1), int32(0)).Return(
-					nil,
+				db.On("CountUsers", mock.Anything, mock.Anything, `(_id!oid="user1");(username=="new",mail=="new@testing.com")`).Return(
 					int32(0),
 					nil,
 				).Once()
@@ -665,8 +608,7 @@ func (suite *Suite) TestUpdateUser() {
 						}
 					},
 					nil).Once()
-				db.On("ListUsers", mock.Anything, mock.Anything, `(_id!oid="user1");(username=="user1")`, int32(1), int32(0)).Return(
-					nil,
+				db.On("CountUsers", mock.Anything, mock.Anything, `(_id!oid="user1");(username=="user1")`).Return(
 					int32(0),
 					nil,
 				).Once()
@@ -708,14 +650,7 @@ func (suite *Suite) TestUpdateUser() {
 						}
 					},
 					nil).Once()
-				db.On("ListUsers", mock.Anything, mock.Anything, `(_id!oid="user1");(username=="user1",mail=="user2@testing.com")`, int32(1), int32(0)).Return(
-					&[]store.User{
-						{
-							Id:       "user2",
-							Username: "user2",
-							Mail:     "user2@testing.com",
-						},
-					},
+				db.On("CountUsers", mock.Anything, mock.Anything, `(_id!oid="user1");(username=="user1",mail=="user2@testing.com")`).Return(
 					int32(1),
 					nil,
 				).Once()
@@ -815,7 +750,7 @@ func (suite *Suite) TestDeleteUser() {
 				Id: "user1",
 			},
 			prepare: func(db *mocks.Store) {
-				db.On("ListGroups", mock.Anything, mock.Anything, `members=="user1"`, mock.Anything, mock.Anything).Return(
+				db.On("ListGroups", mock.Anything, mock.Anything, `members=="user1"`, mock.Anything, mock.Anything, mock.Anything).Return(
 					&[]store.Group{
 						{
 							Id:      "testers",
@@ -824,6 +759,7 @@ func (suite *Suite) TestDeleteUser() {
 						},
 					},
 					int32(-1),
+					"",
 					nil,
 				).Once()
 				db.On("SaveGroup", mock.Anything, mock.Anything, mock.MatchedBy(

@@ -5,6 +5,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+## [0.2.0] - 2020-06-03
+### Changed
+* improved pagination which considers if documents were created or deleted
+### Fixed
+* code & tests cleanup
 ## [0.1.4] - 2020-06-03
 ### Fixed
 * fixed counting documents / total size

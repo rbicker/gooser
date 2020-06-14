@@ -16,6 +16,48 @@ type Store struct {
 	mock.Mock
 }
 
+// CountGroups provides a mock function with given fields: ctx, printer, filterString
+func (_m *Store) CountGroups(ctx context.Context, printer *message.Printer, filterString string) (int32, error) {
+	ret := _m.Called(ctx, printer, filterString)
+
+	var r0 int32
+	if rf, ok := ret.Get(0).(func(context.Context, *message.Printer, string) int32); ok {
+		r0 = rf(ctx, printer, filterString)
+	} else {
+		r0 = ret.Get(0).(int32)
+	}
+
+	var r1 error
+	if rf, ok := ret.Get(1).(func(context.Context, *message.Printer, string) error); ok {
+		r1 = rf(ctx, printer, filterString)
+	} else {
+		r1 = ret.Error(1)
+	}
+
+	return r0, r1
+}
+
+// CountUsers provides a mock function with given fields: ctx, printer, filterString
+func (_m *Store) CountUsers(ctx context.Context, printer *message.Printer, filterString string) (int32, error) {
+	ret := _m.Called(ctx, printer, filterString)
+
+	var r0 int32
+	if rf, ok := ret.Get(0).(func(context.Context, *message.Printer, string) int32); ok {
+		r0 = rf(ctx, printer, filterString)
+	} else {
+		r0 = ret.Get(0).(int32)
+	}
+
+	var r1 error
+	if rf, ok := ret.Get(1).(func(context.Context, *message.Printer, string) error); ok {
+		r1 = rf(ctx, printer, filterString)
+	} else {
+		r1 = ret.Error(1)
+	}
+
+	return r0, r1
+}
+
 // DeleteGroup provides a mock function with given fields: ctx, printer, id
 func (_m *Store) DeleteGroup(ctx context.Context, printer *message.Printer, id string) error {
 	ret := _m.Called(ctx, printer, id)
@@ -205,13 +247,13 @@ func (_m *Store) GetUserByUsername(ctx context.Context, printer *message.Printer
 	return r0, r1
 }
 
-// ListGroups provides a mock function with given fields: ctx, printer, filter, size, skip
-func (_m *Store) ListGroups(ctx context.Context, printer *message.Printer, filter string, size int32, skip int32) (*[]store.Group, int32, error) {
-	ret := _m.Called(ctx, printer, filter, size, skip)
+// ListGroups provides a mock function with given fields: ctx, printer, filterString, orderBy, token, size
+func (_m *Store) ListGroups(ctx context.Context, printer *message.Printer, filterString string, orderBy string, token string, size int32) (*[]store.Group, int32, string, error) {
+	ret := _m.Called(ctx, printer, filterString, orderBy, token, size)
 
 	var r0 *[]store.Group
-	if rf, ok := ret.Get(0).(func(context.Context, *message.Printer, string, int32, int32) *[]store.Group); ok {
-		r0 = rf(ctx, printer, filter, size, skip)
+	if rf, ok := ret.Get(0).(func(context.Context, *message.Printer, string, string, string, int32) *[]store.Group); ok {
+		r0 = rf(ctx, printer, filterString, orderBy, token, size)
 	} else {
 		if ret.Get(0) != nil {
 			r0 = ret.Get(0).(*[]store.Group)
@@ -219,29 +261,36 @@ func (_m *Store) ListGroups(ctx context.Context, printer *message.Printer, filte
 	}
 
 	var r1 int32
-	if rf, ok := ret.Get(1).(func(context.Context, *message.Printer, string, int32, int32) int32); ok {
-		r1 = rf(ctx, printer, filter, size, skip)
+	if rf, ok := ret.Get(1).(func(context.Context, *message.Printer, string, string, string, int32) int32); ok {
+		r1 = rf(ctx, printer, filterString, orderBy, token, size)
 	} else {
 		r1 = ret.Get(1).(int32)
 	}
 
-	var r2 error
-	if rf, ok := ret.Get(2).(func(context.Context, *message.Printer, string, int32, int32) error); ok {
-		r2 = rf(ctx, printer, filter, size, skip)
+	var r2 string
+	if rf, ok := ret.Get(2).(func(context.Context, *message.Printer, string, string, string, int32) string); ok {
+		r2 = rf(ctx, printer, filterString, orderBy, token, size)
 	} else {
-		r2 = ret.Error(2)
+		r2 = ret.Get(2).(string)
 	}
 
-	return r0, r1, r2
+	var r3 error
+	if rf, ok := ret.Get(3).(func(context.Context, *message.Printer, string, string, string, int32) error); ok {
+		r3 = rf(ctx, printer, filterString, orderBy, token, size)
+	} else {
+		r3 = ret.Error(3)
+	}
+
+	return r0, r1, r2, r3
 }
 
-// ListUsers provides a mock function with given fields: ctx, printer, filter, size, skip
-func (_m *Store) ListUsers(ctx context.Context, printer *message.Printer, filter string, size int32, skip int32) (*[]store.User, int32, error) {
-	ret := _m.Called(ctx, printer, filter, size, skip)
+// ListUsers provides a mock function with given fields: ctx, printer, filterString, orderBy, token, size
+func (_m *Store) ListUsers(ctx context.Context, printer *message.Printer, filterString string, orderBy string, token string, size int32) (*[]store.User, int32, string, error) {
+	ret := _m.Called(ctx, printer, filterString, orderBy, token, size)
 
 	var r0 *[]store.User
-	if rf, ok := ret.Get(0).(func(context.Context, *message.Printer, string, int32, int32) *[]store.User); ok {
-		r0 = rf(ctx, printer, filter, size, skip)
+	if rf, ok := ret.Get(0).(func(context.Context, *message.Printer, string, string, string, int32) *[]store.User); ok {
+		r0 = rf(ctx, printer, filterString, orderBy, token, size)
 	} else {
 		if ret.Get(0) != nil {
 			r0 = ret.Get(0).(*[]store.User)
@@ -249,20 +298,27 @@ func (_m *Store) ListUsers(ctx context.Context, printer *message.Printer, filter
 	}
 
 	var r1 int32
-	if rf, ok := ret.Get(1).(func(context.Context, *message.Printer, string, int32, int32) int32); ok {
-		r1 = rf(ctx, printer, filter, size, skip)
+	if rf, ok := ret.Get(1).(func(context.Context, *message.Printer, string, string, string, int32) int32); ok {
+		r1 = rf(ctx, printer, filterString, orderBy, token, size)
 	} else {
 		r1 = ret.Get(1).(int32)
 	}
 
-	var r2 error
-	if rf, ok := ret.Get(2).(func(context.Context, *message.Printer, string, int32, int32) error); ok {
-		r2 = rf(ctx, printer, filter, size, skip)
+	var r2 string
+	if rf, ok := ret.Get(2).(func(context.Context, *message.Printer, string, string, string, int32) string); ok {
+		r2 = rf(ctx, printer, filterString, orderBy, token, size)
 	} else {
-		r2 = ret.Error(2)
+		r2 = ret.Get(2).(string)
 	}
 
-	return r0, r1, r2
+	var r3 error
+	if rf, ok := ret.Get(3).(func(context.Context, *message.Printer, string, string, string, int32) error); ok {
+		r3 = rf(ctx, printer, filterString, orderBy, token, size)
+	} else {
+		r3 = ret.Error(3)
+	}
+
+	return r0, r1, r2, r3
 }
 
 // SaveGroup provides a mock function with given fields: ctx, printer, group

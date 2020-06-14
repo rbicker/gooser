@@ -16,28 +16,38 @@ import (
 )
 
 func main() {
-	infoLog := log.New(os.Stdout, "INFO: ", log.Lmsgprefix+log.LstdFlags)
-	errLog := log.New(os.Stderr, "ERROR: ", log.Lmsgprefix+log.LstdFlags)
+	infoLogger := log.New(os.Stdout, "INFO: ", log.Lmsgprefix+log.LstdFlags)
+	errLogger := log.New(os.Stderr, "ERROR: ", log.Lmsgprefix+log.LstdFlags)
 	var dbOpts []func(*store.MGO) error
 	var srvOpts []func(*server.Server) error
+	// get or create secret
+	var secret string
+	if s, ok := os.LookupEnv("GOOSER_SECRET"); ok {
+		secret = s
+	} else {
+		infoLogger.Printf("because no secret was given, a random string will be used")
+		infoLogger.Printf("this means things like password reset links won't survive a restart of the application")
+		infoLogger.Printf("make sure to set the GOOSER_SECRET environment variable in production")
+		secret = utils.RandomString(20)
+	}
 	// init db connection
 	mongoUrl := utils.LookupEnv("GOOSER_MONGO_URL", "mongodb://localhost:27017")
-	dbOpts = append(dbOpts, store.SetURL(mongoUrl))
+	dbOpts = append(dbOpts, store.WithURL(mongoUrl))
 	dbName := utils.LookupEnv("GOOSER_MONGO_DB", "db")
-	dbOpts = append(dbOpts, store.SetDBName(dbName))
+	dbOpts = append(dbOpts, store.WithDBName(dbName))
 	usersColName := utils.LookupEnv("GOOSER_MONGO_USERS_COLLECTION", "users")
-	dbOpts = append(dbOpts, store.SetUsersCollectionName(usersColName))
+	dbOpts = append(dbOpts, store.WithUsersCollectionName(usersColName))
 	groupsColName := utils.LookupEnv("GOOSER_MONGO_GROUPS_COLLECTION", "groups")
-	dbOpts = append(dbOpts, store.SetGroupsCollectionName(groupsColName))
-	db, err := store.NewMongoConnection(dbOpts...)
+	dbOpts = append(dbOpts, store.WithGroupsCollectionName(groupsColName))
+	db, err := store.NewMongoConnection(secret, dbOpts...)
 	if err != nil {
-		errLog.Fatalf("unable to create mongodb connection: %s", err)
+		errLogger.Fatalf("unable to create mongodb connection: %s", err)
 	}
 	err = db.Connect()
 	if err != nil {
-		errLog.Fatalf("unable to connect to mongodb: %s", err)
+		errLogger.Fatalf("unable to connect to mongodb: %s", err)
 	}
-	infoLog.Println("connected to mongodb")
+	infoLogger.Println("connected to mongodb")
 	// mailer
 	var mailClient mailer.MailClient
 	smtpHost, ok := os.LookupEnv("GOOSER_SMTP_HOST")
@@ -50,9 +60,9 @@ func main() {
 			log.Fatalf("error while creating mail client: %s", err)
 		}
 	} else {
-		infoLog.Println("no SMTP settings given, sending mails by logging them to stdout")
-		infoLog.Println("to send real mails, have a look at the GOOSER_SMTP_* environment variables")
-		mailClient = mailer.NewLogMailer(infoLog)
+		infoLogger.Println("no SMTP settings given, sending mails by logging them to stdout")
+		infoLogger.Println("to send real mails, have a look at the GOOSER_SMTP_* environment variables")
+		mailClient = mailer.NewLogMailer(infoLogger)
 	}
 	mailFrom, _ := os.LookupEnv("GOOSER_MAIL_FROM")
 	siteName := utils.LookupEnv("GOOSER_SITE_NAME", "gooser")
@@ -69,22 +79,16 @@ func main() {
 	oauthUrl := utils.LookupEnv("GOOSER_OAUTH_URL", "http://localhost:4444")
 	oAuth, err := auth.NewOAuthClient(oauthUrl)
 	if err != nil {
-		errLog.Fatalf("unable to create oAuth client: %s", err)
-	}
-	secret := "secret"
-	if v, ok := os.LookupEnv("GOOSER_SECRET"); ok {
-		secret = v
-	} else {
-		infoLog.Printf("WARNING: using default secret '%s', this is very insecure, please set the GOOSER_SECRET environment variable to a random secret string", secret)
+		errLogger.Fatalf("unable to create oAuth client: %s", err)
 	}
 	srv, err := server.NewServer(secret, db, oAuth, mailer, srvOpts...)
 	if err != nil {
-		errLog.Fatalf("unable to create new gooser server: %s", err)
+		errLogger.Fatalf("unable to create new gooser server: %s", err)
 	}
 	// init collections
 	err = srv.InitCollections(context.Background())
 	if err != nil {
-		errLog.Fatalf("unable to initialize collections: %s", err)
+		errLogger.Fatalf("unable to initialize collections: %s", err)
 	}
 	// channels
 	errChan := make(chan error)
@@ -93,25 +97,25 @@ func main() {
 	signal.Notify(stopChan, syscall.SIGTERM, syscall.SIGINT)
 	// serve in a go routine
 	go func() {
-		infoLog.Println("starting gooser server")
+		infoLogger.Println("starting gooser server")
 		if err := srv.Serve(); err != nil {
 			errChan <- err
 		}
 	}()
 	// terminate gracefully before leaving the main function
 	defer func() {
-		infoLog.Println("stopping grpc server")
+		infoLogger.Println("stopping grpc server")
 		srv.Stop()
-		infoLog.Println("disconnecting from mongodb")
+		infoLogger.Println("disconnecting from mongodb")
 		err := db.Disconnect(context.TODO())
 		if err != nil {
-			errLog.Fatalf("error while disconnecting from mongodb: %s", err)
+			errLogger.Fatalf("error while disconnecting from mongodb: %s", err)
 		}
 	}()
 	// block until either OS signal, or server fatal error
 	select {
 	case err := <-errChan:
-		errLog.Printf("Fatal error: %v\n", err)
+		errLogger.Printf("Fatal error: %v\n", err)
 	case <-stopChan:
 	}
 }

@@ -22,7 +22,8 @@ import (
 
 // Store abstracts saving and receiving data.
 type Store interface {
-	ListUsers(ctx context.Context, printer *message.Printer, filter string, size, skip int32) (*[]User, int32, error)
+	ListUsers(ctx context.Context, printer *message.Printer, filterString, orderBy, token string, size int32) (users *[]User, totalSize int32, nextToken string, err error)
+	CountUsers(ctx context.Context, printer *message.Printer, filterString string) (int32, error)
 	GetUser(ctx context.Context, printer *message.Printer, id string) (*User, error)
 	GetUserByUsername(ctx context.Context, printer *message.Printer, username string) (*User, error)
 	GetUserByMail(ctx context.Context, printer *message.Printer, mail string) (*User, error)
@@ -30,7 +31,8 @@ type Store interface {
 	GetUserByPasswordResetToken(ctx context.Context, printer *message.Printer, token string) (*User, error)
 	SaveUser(ctx context.Context, printer *message.Printer, user *User) (*User, error)
 	DeleteUser(ctx context.Context, printer *message.Printer, id string) error
-	ListGroups(ctx context.Context, printer *message.Printer, filter string, size, skip int32) (*[]Group, int32, error)
+	ListGroups(ctx context.Context, printer *message.Printer, filterString, orderBy, token string, size int32) (groups *[]Group, totalSize int32, nextToken string, err error)
+	CountGroups(ctx context.Context, printer *message.Printer, filterString string) (int32, error)
 	GetGroup(ctx context.Context, printer *message.Printer, id string) (*Group, error)
 	GetGroupByName(ctx context.Context, printer *message.Printer, name string) (*Group, error)
 	SaveGroup(ctx context.Context, printer *message.Printer, group *Group) (*Group, error)

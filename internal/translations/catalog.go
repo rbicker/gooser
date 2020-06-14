@@ -36,208 +36,212 @@ func init() {
 }
 
 var messageKeyToIndex = map[string]int{
-	"%s: confirm mail address": 0,
-	"%s: password reset":       3,
-	"Hi %s! Please confirm your mail address by clicking the following link. Thanks!\n%s":                                                                1,
-	"Hi %s! To reset your password, click the following link: \n%s\n\nIf you did not request to reset your password, please ignore this message. Thanks": 4,
-	"could not find group with id %s":                                  6,
-	"could not find user with id %s":                                   21,
-	"could not parse given language":                                   23,
-	"error while counting groups":                                      8,
-	"error while counting users":                                       25,
-	"error while looking up groups":                                    11,
-	"error while querying member":                                      12,
-	"error while saving group":                                         51,
-	"error while saving user":                                          64,
-	"error while sending mail: %s":                                     2,
-	"group name needs to have a length of at least 3":                  7,
-	"invalid group id '%s'":                                            50,
-	"invalid id '%s'":                                                  47,
-	"invalid mail address":                                             24,
-	"invalid page token, unable to unmarshal to page token: %s":        19,
-	"invalid token":                                                    42,
-	"invalid user id":                                                  65,
-	"invalid user id '%s'":                                             63,
-	"invalid username, only lowercase letters and numbers are allowed": 22,
-	"mail address not set":                                             28,
-	"mismatch between given filter %s and filter in page token %s":     20,
-	"no token given":                                                   41,
-	"not allowed to change password for other users":                   37,
-	"not allowed to create groups":                                     13,
-	"not allowed to delete groups":                                     17,
-	"not allowed to delete user":                                       35,
-	"not allowed to edit other users":                                  31,
-	"not allowed to set confirmed":                                     29,
-	"not allowed to update groups":                                     14,
-	"only %v of %v given memberIds were found":                         10,
-	"password cannot be changed using the UpdateUser function, use ChangePassword instead": 33,
-	"password mismatch":                                              38,
-	"password must have a length of at least 7":                      26,
-	"roles cannot be assigned to users directly":                     32,
-	"roles cannot be assigned to users directly, use groups instead": 27,
-	"the request was canceled by the client":                         43,
-	"token mismatch":                                                 55,
-	"unable to count groups: %s":                                     44,
-	"unable to count users: %s":                                      58,
-	"unable to create generate field mask: %s":                       15,
-	"unable to create page token: %s":                                5,
-	"unable to decode group: %s":                                     46,
-	"unable to decode user: %s":                                      60,
-	"unable to encrypt confirmation: %s":                             54,
-	"unable to encrypt reset password struct: %s":                    57,
-	"unable to find group named %s":                                  49,
-	"unable to find group with id %s":                                48,
-	"unable to find group with id '%s'":                              52,
-	"unable to find user":                                            62,
-	"unable to find user with given id":                              66,
-	"unable to find user with id %s":                                 61,
-	"unable to hash given password":                                  30,
-	"unable to json marshal confirmation: %s":                        53,
-	"unable to json marshal reset password struct: %s":               56,
-	"unable to marshal token to json: %s":                            18,
-	"unable to merge groups":                                         16,
-	"unable to merge users":                                          34,
-	"unable to query groups: %s":                                     45,
-	"unable to query members":                                        9,
-	"unable to query users: %s":                                      59,
-	"unable to remove user from group %s":                            36,
-	"unable to save user":                                            39,
-	"unable to send reset password mail":                             40,
+	"%s has a length of 0":     4,
+	"%s: confirm mail address": 34,
+	"%s: password reset":       37,
+	"Hi %s! Please confirm your mail address by clicking the following link. Thanks!\n%s":                                                                35,
+	"Hi %s! To reset your password, click the following link: \n%s\n\nIf you did not request to reset your password, please ignore this message. Thanks": 38,
+	"could not find group with id %s":                                  39,
+	"could not find user with id %s":                                   49,
+	"could not parse given language":                                   51,
+	"error while querying %s":                                          10,
+	"error while querying member":                                      43,
+	"error while saving group":                                         17,
+	"error while saving user":                                          31,
+	"error while sending mail: %s":                                     36,
+	"group name needs to have a length of at least 3":                  40,
+	"internal error while building filter":                             0,
+	"invalid group id '%s'":                                            16,
+	"invalid id '%s'":                                                  13,
+	"invalid mail address":                                             52,
+	"invalid page token given":                                         5,
+	"invalid rsql filter string '%s': %s":                              3,
+	"invalid token":                                                    23,
+	"invalid user id":                                                  32,
+	"invalid user id '%s'":                                             30,
+	"invalid username, only lowercase letters and numbers are allowed": 50,
+	"mail address not set":                                             55,
+	"no token given":                                                   21,
+	"not allowed to change password for other users":                   64,
+	"not allowed to create groups":                                     44,
+	"not allowed to delete groups":                                     48,
+	"not allowed to delete user":                                       62,
+	"not allowed to edit other users":                                  58,
+	"not allowed to set confirmed":                                     56,
+	"not allowed to update groups":                                     45,
+	"only %v of %v given memberIds were found":                         42,
+	"orderBy field has a length of 0":                                  1,
+	"pagination filter and given filters do not match":                 6,
+	"pagination orderBy and given orderBy do not match":                7,
+	"password cannot be changed using the UpdateUser function, use ChangePassword instead": 60,
+	"password mismatch":                                              65,
+	"password must have a length of at least 7":                      53,
+	"roles cannot be assigned to users directly":                     59,
+	"roles cannot be assigned to users directly, use groups instead": 54,
+	"the request was canceled by the client":                         8,
+	"token mismatch":                                                 22,
+	"unable to count %s":                                             9,
+	"unable to count groups":                                         12,
+	"unable to count users":                                          27,
+	"unable to create generate field mask: %s":                       46,
+	"unable to decode group: %s":                                     11,
+	"unable to decode user: %s":                                      26,
+	"unable to encrypt confirmation: %s":                             20,
+	"unable to encrypt reset password struct: %s":                    25,
+	"unable to find group named %s":                                  15,
+	"unable to find group with id %s":                                14,
+	"unable to find group with id '%s'":                              18,
+	"unable to find user":                                            29,
+	"unable to find user with given id":                              33,
+	"unable to find user with id %s":                                 28,
+	"unable to hash given password":                                  57,
+	"unable to json marshal confirmation: %s":                        19,
+	"unable to json marshal reset password struct: %s":               24,
+	"unable to merge groups":                                         47,
+	"unable to merge users":                                          61,
+	"unable to query members":                                        41,
+	"unable to remove user from group %s":                            63,
+	"unable to save user":                                            66,
+	"unable to search next document while creating pagination token": 2,
+	"unable to send reset password mail":                             67,
 }
 
-var deIndex = []uint32{ // 68 elements
+var deIndex = []uint32{ // 69 elements
 	// Entry 0 - 1F
-	0x00000000, 0x00000020, 0x00000089, 0x000000b0,
-	0x000000ce, 0x00000188, 0x000001b7, 0x000001ea,
-	0x00000228, 0x00000248, 0x00000272, 0x000002a1,
-	0x000002c2, 0x000002e5, 0x0000030c, 0x00000337,
-	0x00000365, 0x00000393, 0x000003b9, 0x000003e4,
-	0x0000041d, 0x00000468, 0x0000049b, 0x000004e1,
-	0x00000506, 0x0000051e, 0x0000053f, 0x00000578,
-	0x000005c7, 0x000005e2, 0x00000607, 0x0000063d,
+	0x00000000, 0x0000002b, 0x0000004d, 0x000000aa,
+	0x000000d8, 0x000000f4, 0x0000011a, 0x00000158,
+	0x0000019d, 0x000001c6, 0x000001e4, 0x00000203,
+	0x0000022f, 0x00000255, 0x00000269, 0x0000029a,
+	0x000002cb, 0x000002e9, 0x0000030a, 0x0000033d,
+	0x00000371, 0x000003a8, 0x000003bd, 0x000003d9,
+	0x000003eb, 0x00000428, 0x00000468, 0x00000497,
+	0x000004be, 0x000004f3, 0x00000519, 0x00000538,
 	// Entry 20 - 3F
-	0x00000671, 0x000006a9, 0x0000071f, 0x0000074e,
-	0x00000779, 0x000007a8, 0x000007e9, 0x00000808,
-	0x0000082f, 0x00000860, 0x00000875, 0x00000887,
-	0x000008b0, 0x000008dd, 0x0000090b, 0x00000937,
-	0x0000094b, 0x0000097c, 0x000009ad, 0x000009cb,
-	0x000009ec, 0x00000a1f, 0x00000a53, 0x00000a8a,
-	0x00000aa6, 0x00000ae3, 0x00000b23, 0x00000b51,
-	0x00000b80, 0x00000baf, 0x00000be4, 0x00000c0a,
+	0x0000055c, 0x00000573, 0x000005ae, 0x000005ce,
+	0x00000637, 0x0000065e, 0x0000067c, 0x00000736,
+	0x00000769, 0x000007a7, 0x000007d1, 0x00000800,
+	0x00000823, 0x0000084a, 0x00000875, 0x000008a3,
+	0x000008d1, 0x000008f7, 0x0000092a, 0x00000970,
+	0x00000995, 0x000009ad, 0x000009e6, 0x00000a35,
+	0x00000a50, 0x00000a75, 0x00000aab, 0x00000adf,
+	0x00000b17, 0x00000b8d, 0x00000bbc, 0x00000be7,
 	// Entry 40 - 5F
-	0x00000c29, 0x00000c4d, 0x00000c64, 0x00000c9f,
-} // Size: 296 bytes
+	0x00000c16, 0x00000c57, 0x00000c76, 0x00000c9d,
+	0x00000cce,
+} // Size: 300 bytes
 
-const deData string = "" + // Size: 3231 bytes
-	"\x02%[1]s: Mail-Adresse bestätigen\x02Hallo %[1]s! Bitte bestätige deine" +
-	" Mail-Adresse, indem du auf den folgenden Link klickst. Danke!\x0a%[2]s " +
-	"\x02Fehler beim Versenden des Mails: %[1]s\x02%[1]s: Passwort zurücksetz" +
-	"en\x02Hallo %[1]s! Um dein Passwort zurückzusetzen, klicke den folgenden" +
-	" Link: \x0a%[2]s\x0a\x0aFalls du das zurücksetzen des Passworts nicht an" +
-	"gefordert hast, bitte ignoriere diese Nachricht. Danke\x02Page Token kon" +
-	"nte nicht erstellt werden: %[1]s\x02Gruppe mit ID '%[1]s' konnte nicht g" +
-	"efunden werden\x02Name der Gruppe sollte mindestens eine Länge von 3 auf" +
-	"weisen\x02Fehler beim Zählen der Gruppen\x02Mitglieder konnten nicht abg" +
-	"efragt werden\x02Nur %[1]v der %[2]v Mitglieder wurden gefunden\x02Fehle" +
-	"r beim Agfragen der Gruppen\x02Fehler beim Abfragen des Mitglieds\x02Nic" +
-	"ht berechtigt, Gruppen zu erstellen\x02Nicht berechtigt, Gruppen zu aktu" +
-	"alisieren\x02Feldmaske konnte nicht erstellt werden: %[1]s\x02Gruppen ko" +
-	"nnten nicht zusammengeführt werden\x02Nicht berechtigt, Gruppen zu lösch" +
-	"en\x02Token kann nicht umgewandelt werden: %[1]s\x02Ungültiger Page Toke" +
-	"n, Umwandlung nicht möglich: %[1]s\x02Filter %[1]s stimmt nicht mit dem " +
-	"Filter %[2]s aus dem Page Token überein\x02Benutzer mit id %[1]s konnte " +
-	"nicht gefunden werden\x02Ungüliger Benutzername, nur Kleinbuchstaben und" +
-	" Nummern sind erlaubt\x02Sprache konnte nicht bestimmt werden\x02Ungülti" +
-	"ge Mail Adresse\x02Fehler beim Zählen der Benutzer\x02Das Passwort muss " +
-	"mindestens eine Länge von 7 aufweisen\x02Rollen können nicht direkt Benu" +
-	"tzern zugewiesen werden, verwende Gruppen dazu\x02Mail Adresse nicht geg" +
-	"eben\x02Bestätigt darf nicht gesetzt werden\x02Es konnte kein Hash für d" +
-	"as Passwort erstellt werden\x02Keine Berechtigung um andere Benutzer zu " +
-	"bearbeiten\x02Rollen können nicht direkt Benutzern zugeordnet werden\x02" +
-	"Passwort kann nicht mit der UpdateUser Funktion aktualisiert werden, ver" +
-	"wende die ChangePassword Funktion stattdessen\x02Benutzer können nicht z" +
-	"usammengeführt werden\x02Keine Berechtigung um Benutzer zu löschen\x02Be" +
-	"nutzer kann nicht von Gruppe entfernt werden\x02Keine Berechtigungen um " +
-	"das Passwort anderer Benutzer zu ändern\x02Passwort stimmt nicht überein" +
-	"\x02Benutzer kann nicht gespeichert werden\x02Passwort Reset Mail konnte" +
-	" nicht versandt werden\x02Kein Token angegeben\x02ungültiger Token\x02di" +
-	"e Anfrage wurde vom Client abgebrochen\x02Gruppen können nicht gezählt w" +
-	"erden: %[1]s\x02Gruppen können nicht abgefragt werden: %[1]s\x02Gruppe k" +
-	"onnte nicht decodiert werden: %[1]s\x02ungültige ID %[1]s\x02Gruppe mit " +
-	"id %[1]s konnte nicht gefunden werden\x02Gruppe namens %[1]s konnte nich" +
-	"t gefunden werden\x02Ungültige Gruppen-ID '%[1]s'\x02Fehler beim Speiche" +
-	"rn der Gruppe\x02Gruppe mit ID '%[1]s' konnte nicht gefunden werden\x02B" +
-	"estätigung konnte nicht umgewandelt werden: %[1]s\x02Bestätigung konnte " +
-	"nicht verschlüsselt werden: %[1]s\x02Token stimmt nicht überein\x02Passw" +
-	"ort Reset Objekt konnte nicht umgewandelt werden: %[1]s\x02Passwort Rese" +
-	"t Objekt konnte nicht verschlüsselt werden: %[1]s\x02Benutzer konnten ni" +
-	"cht gezählt werden: %[1]s\x02Benutzer konnten nicht abgefragt werden: %[" +
-	"1]s\x02Benutzer konnten nicht dekodiert werden: %[1]s\x02Benutzer mit ID" +
-	" '%[1]s' konnte nicht gefunden werden\x02Benutzer konnte nicht gefunden " +
-	"werden\x02Ungültige Benutzer ID '%[1]s'\x02Fehler beim Speichern des Ben" +
-	"utzers\x02Ungültige Benutzer ID\x02Benutzer mit der gegebenen ID konnte " +
-	"nicht gefunden werden"
+const deData string = "" + // Size: 3278 bytes
+	"\x02Interner Fehler beim Erstellen des Filters\x02Sortierfeld hat eine L" +
+	"änge von 0\x02während dem Erstellen des Pagination-Tokens konnte das Fo" +
+	"lgedokument nicht abgefragt werden\x02ungültiger rsql Filter String '%[1" +
+	"]s': %[2]s\x02%[1]s hat eine Länge von 0\x02Ungültiger Pagination Token " +
+	"erhalten\x02Pagination Filter und gegebener Filter stimmen nicht überein" +
+	"\x02Pagination Sortierung und gegebene Sortierung stimmen nicht überein" +
+	"\x02die Anfrage wurde vom Client abgebrochen\x02Fehler beim Zählen von %" +
+	"[1]s\x02Fehler beim Abfragen von %[1]s\x02Gruppe konnte nicht decodiert " +
+	"werden: %[1]s\x02Gruppen konnten nicht gezählt werden\x02ungültige ID %[" +
+	"1]s\x02Gruppe mit id %[1]s konnte nicht gefunden werden\x02Gruppe namens" +
+	" %[1]s konnte nicht gefunden werden\x02Ungültige Gruppen-ID '%[1]s'\x02F" +
+	"ehler beim Speichern der Gruppe\x02Gruppe mit ID '%[1]s' konnte nicht ge" +
+	"funden werden\x02Bestätigung konnte nicht umgewandelt werden: %[1]s\x02B" +
+	"estätigung konnte nicht verschlüsselt werden: %[1]s\x02Kein Token angege" +
+	"ben\x02Token stimmt nicht überein\x02ungültiger Token\x02Passwort Reset " +
+	"Objekt konnte nicht umgewandelt werden: %[1]s\x02Passwort Reset Objekt k" +
+	"onnte nicht verschlüsselt werden: %[1]s\x02Benutzer konnten nicht dekodi" +
+	"ert werden: %[1]s\x02Benutzer konnten nicht gezählt werden\x02Benutzer m" +
+	"it ID '%[1]s' konnte nicht gefunden werden\x02Benutzer konnte nicht gefu" +
+	"nden werden\x02Ungültige Benutzer ID '%[1]s'\x02Fehler beim Speichern de" +
+	"s Benutzers\x02Ungültige Benutzer ID\x02Benutzer mit der gegebenen ID ko" +
+	"nnte nicht gefunden werden\x02%[1]s: Mail-Adresse bestätigen\x02Hallo %[" +
+	"1]s! Bitte bestätige deine Mail-Adresse, indem du auf den folgenden Link" +
+	" klickst. Danke!\x0a%[2]s \x02Fehler beim Versenden des Mails: %[1]s\x02" +
+	"%[1]s: Passwort zurücksetzen\x02Hallo %[1]s! Um dein Passwort zurückzuse" +
+	"tzen, klicke den folgenden Link: \x0a%[2]s\x0a\x0aFalls du das zurückset" +
+	"zen des Passworts nicht angefordert hast, bitte ignoriere diese Nachrich" +
+	"t. Danke\x02Gruppe mit ID '%[1]s' konnte nicht gefunden werden\x02Name d" +
+	"er Gruppe sollte mindestens eine Länge von 3 aufweisen\x02Mitglieder kon" +
+	"nten nicht abgefragt werden\x02Nur %[1]v der %[2]v Mitglieder wurden gef" +
+	"unden\x02Fehler beim Abfragen des Mitglieds\x02Nicht berechtigt, Gruppen" +
+	" zu erstellen\x02Nicht berechtigt, Gruppen zu aktualisieren\x02Feldmaske" +
+	" konnte nicht erstellt werden: %[1]s\x02Gruppen konnten nicht zusammenge" +
+	"führt werden\x02Nicht berechtigt, Gruppen zu löschen\x02Benutzer mit id " +
+	"%[1]s konnte nicht gefunden werden\x02Ungüliger Benutzername, nur Kleinb" +
+	"uchstaben und Nummern sind erlaubt\x02Sprache konnte nicht bestimmt werd" +
+	"en\x02Ungültige Mail Adresse\x02Das Passwort muss mindestens eine Länge " +
+	"von 7 aufweisen\x02Rollen können nicht direkt Benutzern zugewiesen werde" +
+	"n, verwende Gruppen dazu\x02Mail Adresse nicht gegeben\x02Bestätigt darf" +
+	" nicht gesetzt werden\x02Es konnte kein Hash für das Passwort erstellt w" +
+	"erden\x02Keine Berechtigung um andere Benutzer zu bearbeiten\x02Rollen k" +
+	"önnen nicht direkt Benutzern zugeordnet werden\x02Passwort kann nicht m" +
+	"it der UpdateUser Funktion aktualisiert werden, verwende die ChangePassw" +
+	"ord Funktion stattdessen\x02Benutzer können nicht zusammengeführt werden" +
+	"\x02Keine Berechtigung um Benutzer zu löschen\x02Benutzer kann nicht von" +
+	" Gruppe entfernt werden\x02Keine Berechtigungen um das Passwort anderer " +
+	"Benutzer zu ändern\x02Passwort stimmt nicht überein\x02Benutzer kann nic" +
+	"ht gespeichert werden\x02Passwort Reset Mail konnte nicht versandt werde" +
+	"n"
 
-var enIndex = []uint32{ // 68 elements
+var enIndex = []uint32{ // 69 elements
 	// Entry 0 - 1F
-	0x00000000, 0x0000001c, 0x00000075, 0x00000095,
-	0x000000ab, 0x00000141, 0x00000164, 0x00000187,
-	0x000001b7, 0x000001d3, 0x000001eb, 0x0000021a,
-	0x00000238, 0x00000254, 0x00000271, 0x0000028e,
-	0x000002ba, 0x000002d1, 0x000002ee, 0x00000315,
-	0x00000352, 0x00000395, 0x000003b7, 0x000003f8,
-	0x00000417, 0x0000042c, 0x00000447, 0x00000471,
-	0x000004b0, 0x000004c5, 0x000004e2, 0x00000500,
+	0x00000000, 0x00000025, 0x00000045, 0x00000084,
+	0x000000ae, 0x000000c6, 0x000000df, 0x00000110,
+	0x00000142, 0x00000169, 0x0000017f, 0x0000019a,
+	0x000001b8, 0x000001cf, 0x000001e2, 0x00000205,
+	0x00000226, 0x0000023f, 0x00000258, 0x0000027d,
+	0x000002a8, 0x000002ce, 0x000002dd, 0x000002ec,
+	0x000002fa, 0x0000032e, 0x0000035d, 0x0000037a,
+	0x00000390, 0x000003b2, 0x000003c6, 0x000003de,
 	// Entry 20 - 3F
-	0x00000520, 0x0000054b, 0x000005a0, 0x000005b6,
-	0x000005d1, 0x000005f8, 0x00000627, 0x00000639,
-	0x0000064d, 0x00000670, 0x0000067f, 0x0000068d,
-	0x000006b4, 0x000006d2, 0x000006f0, 0x0000070e,
-	0x00000721, 0x00000744, 0x00000765, 0x0000077e,
-	0x00000797, 0x000007bc, 0x000007e7, 0x0000080d,
-	0x0000081c, 0x00000850, 0x0000087f, 0x0000089c,
-	0x000008b9, 0x000008d6, 0x000008f8, 0x0000090c,
+	0x000003f6, 0x00000406, 0x00000428, 0x00000444,
+	0x0000049d, 0x000004bd, 0x000004d3, 0x00000569,
+	0x0000058c, 0x000005bc, 0x000005d4, 0x00000603,
+	0x0000061f, 0x0000063c, 0x00000659, 0x00000685,
+	0x0000069c, 0x000006b9, 0x000006db, 0x0000071c,
+	0x0000073b, 0x00000750, 0x0000077a, 0x000007b9,
+	0x000007ce, 0x000007eb, 0x00000809, 0x00000829,
+	0x00000854, 0x000008a9, 0x000008bf, 0x000008da,
 	// Entry 40 - 5F
-	0x00000924, 0x0000093c, 0x0000094c, 0x0000096e,
-} // Size: 296 bytes
+	0x00000901, 0x00000930, 0x00000942, 0x00000956,
+	0x00000979,
+} // Size: 300 bytes
 
-const enData string = "" + // Size: 2414 bytes
-	"\x02%[1]s: confirm mail address\x02Hi %[1]s! Please confirm your mail ad" +
-	"dress by clicking the following link. Thanks!\x0a%[2]s\x02error while se" +
-	"nding mail: %[1]s\x02%[1]s: password reset\x02Hi %[1]s! To reset your pa" +
-	"ssword, click the following link: \x0a%[2]s\x0a\x0aIf you did not reques" +
-	"t to reset your password, please ignore this message. Thanks\x02unable t" +
-	"o create page token: %[1]s\x02could not find group with id %[1]s\x02grou" +
-	"p name needs to have a length of at least 3\x02error while counting grou" +
-	"ps\x02unable to query members\x02only %[1]v of %[2]v given memberIds wer" +
-	"e found\x02error while looking up groups\x02error while querying member" +
-	"\x02not allowed to create groups\x02not allowed to update groups\x02unab" +
-	"le to create generate field mask: %[1]s\x02unable to merge groups\x02not" +
-	" allowed to delete groups\x02unable to marshal token to json: %[1]s\x02i" +
-	"nvalid page token, unable to unmarshal to page token: %[1]s\x02mismatch " +
-	"between given filter %[1]s and filter in page token %[2]s\x02could not f" +
-	"ind user with id %[1]s\x02invalid username, only lowercase letters and n" +
-	"umbers are allowed\x02could not parse given language\x02invalid mail add" +
-	"ress\x02error while counting users\x02password must have a length of at " +
-	"least 7\x02roles cannot be assigned to users directly, use groups instea" +
-	"d\x02mail address not set\x02not allowed to set confirmed\x02unable to h" +
-	"ash given password\x02not allowed to edit other users\x02roles cannot be" +
-	" assigned to users directly\x02password cannot be changed using the Upda" +
-	"teUser function, use ChangePassword instead\x02unable to merge users\x02" +
-	"not allowed to delete user\x02unable to remove user from group %[1]s\x02" +
-	"not allowed to change password for other users\x02password mismatch\x02u" +
-	"nable to save user\x02unable to send reset password mail\x02no token giv" +
-	"en\x02invalid token\x02the request was canceled by the client\x02unable " +
-	"to count groups: %[1]s\x02unable to query groups: %[1]s\x02unable to dec" +
-	"ode group: %[1]s\x02invalid id '%[1]s'\x02unable to find group with id %" +
-	"[1]s\x02unable to find group named %[1]s\x02invalid group id '%[1]s'\x02" +
-	"error while saving group\x02unable to find group with id '%[1]s'\x02unab" +
-	"le to json marshal confirmation: %[1]s\x02unable to encrypt confirmation" +
-	": %[1]s\x02token mismatch\x02unable to json marshal reset password struc" +
-	"t: %[1]s\x02unable to encrypt reset password struct: %[1]s\x02unable to " +
-	"count users: %[1]s\x02unable to query users: %[1]s\x02unable to decode u" +
-	"ser: %[1]s\x02unable to find user with id %[1]s\x02unable to find user" +
-	"\x02invalid user id '%[1]s'\x02error while saving user\x02invalid user i" +
-	"d\x02unable to find user with given id"
+const enData string = "" + // Size: 2425 bytes
+	"\x02internal error while building filter\x02orderBy field has a length o" +
+	"f 0\x02unable to search next document while creating pagination token" +
+	"\x02invalid rsql filter string '%[1]s': %[2]s\x02%[1]s has a length of 0" +
+	"\x02invalid page token given\x02pagination filter and given filters do n" +
+	"ot match\x02pagination orderBy and given orderBy do not match\x02the req" +
+	"uest was canceled by the client\x02unable to count %[1]s\x02error while " +
+	"querying %[1]s\x02unable to decode group: %[1]s\x02unable to count group" +
+	"s\x02invalid id '%[1]s'\x02unable to find group with id %[1]s\x02unable " +
+	"to find group named %[1]s\x02invalid group id '%[1]s'\x02error while sav" +
+	"ing group\x02unable to find group with id '%[1]s'\x02unable to json mars" +
+	"hal confirmation: %[1]s\x02unable to encrypt confirmation: %[1]s\x02no t" +
+	"oken given\x02token mismatch\x02invalid token\x02unable to json marshal " +
+	"reset password struct: %[1]s\x02unable to encrypt reset password struct:" +
+	" %[1]s\x02unable to decode user: %[1]s\x02unable to count users\x02unabl" +
+	"e to find user with id %[1]s\x02unable to find user\x02invalid user id '" +
+	"%[1]s'\x02error while saving user\x02invalid user id\x02unable to find u" +
+	"ser with given id\x02%[1]s: confirm mail address\x02Hi %[1]s! Please con" +
+	"firm your mail address by clicking the following link. Thanks!\x0a%[2]s" +
+	"\x02error while sending mail: %[1]s\x02%[1]s: password reset\x02Hi %[1]s" +
+	"! To reset your password, click the following link: \x0a%[2]s\x0a\x0aIf " +
+	"you did not request to reset your password, please ignore this message. " +
+	"Thanks\x02could not find group with id %[1]s\x02group name needs to have" +
+	" a length of at least 3\x02unable to query members\x02only %[1]v of %[2]" +
+	"v given memberIds were found\x02error while querying member\x02not allow" +
+	"ed to create groups\x02not allowed to update groups\x02unable to create " +
+	"generate field mask: %[1]s\x02unable to merge groups\x02not allowed to d" +
+	"elete groups\x02could not find user with id %[1]s\x02invalid username, o" +
+	"nly lowercase letters and numbers are allowed\x02could not parse given l" +
+	"anguage\x02invalid mail address\x02password must have a length of at lea" +
+	"st 7\x02roles cannot be assigned to users directly, use groups instead" +
+	"\x02mail address not set\x02not allowed to set confirmed\x02unable to ha" +
+	"sh given password\x02not allowed to edit other users\x02roles cannot be " +
+	"assigned to users directly\x02password cannot be changed using the Updat" +
+	"eUser function, use ChangePassword instead\x02unable to merge users\x02n" +
+	"ot allowed to delete user\x02unable to remove user from group %[1]s\x02n" +
+	"ot allowed to change password for other users\x02password mismatch\x02un" +
+	"able to save user\x02unable to send reset password mail"
 
-	// Total table size 6237 bytes (6KiB); checksum: 9B6A0EE9
+	// Total table size 6303 bytes (6KiB); checksum: 11146F60

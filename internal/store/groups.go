@@ -16,37 +16,61 @@ import (
 
 // ListGroups lists groups from the mongo db.
 // It returns the documents, the total size of documents for the given filter and a grpc status type error if anything goes wrong.
-func (m *MGO) ListGroups(ctx context.Context, printer *message.Printer, filter string, size, skip int32) (*[]Group, int32, error) {
-	query, err := m.BsonDocFromRsqlString(filter)
+func (m *MGO) ListGroups(ctx context.Context, printer *message.Printer, filterString, orderBy, token string, size int32) (groups *[]Group, totalSize int32, nextToken string, err error) {
+	cur, total, err := m.queryDocuments(
+		ctx,
+		printer,
+		m.usersCollection,
+		filterString,
+		orderBy,
+		token,
+		size,
+	)
 	if err != nil {
-		return nil, 0, err
-	}
-	if ctx.Err() == context.Canceled {
-		return nil, 0, status.Errorf(codes.Canceled, printer.Sprintf("the request was canceled by the client"))
-	}
-	count, err := m.groupsCollection.CountDocuments(ctx, query, nil)
-	if err != nil {
-		return nil, 0, status.Errorf(codes.Internal, printer.Sprintf("unable to count groups: %s", err))
-	}
-	findOptions := options.Find()
-	findOptions.SetLimit(int64(size))
-	findOptions.SetSkip(int64(skip))
-	findOptions.SetSort(bson.D{{"name", 1}})
-	cur, err := m.groupsCollection.Find(ctx, query, findOptions)
-	if err != nil {
-		return nil, 0, status.Errorf(codes.Internal, printer.Sprintf("unable to query groups: %s", err))
+		return nil, 0, "", err
 	}
 	defer cur.Close(ctx)
-	var groups []Group
+	var g Group
 	for cur.Next(ctx) {
-		var g Group
 		err = cur.Decode(&g)
 		if err != nil {
-			return nil, 0, status.Errorf(codes.Internal, printer.Sprintf("unable to decode group: %s", err))
+			return nil, 0, "", status.Errorf(codes.Internal, printer.Sprintf("unable to decode group: %s", err))
 		}
-		groups = append(groups, g)
+		*groups = append(*groups, g)
 	}
-	return &groups, int32(count), nil
+	// if there might be more results
+	l := int32(len(*groups))
+	if size == l && totalSize > l {
+		nextToken, err = m.NextPageToken(
+			ctx,
+			printer,
+			m.usersCollection,
+			filterString,
+			orderBy,
+			g,
+		)
+		if err != nil {
+			return nil, 0, "", err
+		}
+	}
+	return groups, total, nextToken, nil
+}
+
+// CountGroups returns the number of user documents corresponding to the given filter.
+func (m *MGO) CountGroups(ctx context.Context, printer *message.Printer, filterString string) (int32, error) {
+	filter, err := m.bsonDocFromRsqlString(printer, filterString)
+	if err != nil {
+		return 0, err
+	}
+	count, err := m.groupsCollection.CountDocuments(ctx, filter, nil)
+	if err != nil {
+		if err == mongo.ErrNoDocuments {
+			return 0, nil
+		}
+		m.errorLogger.Printf("unable to count groups: %s", err)
+		return 0, status.Errorf(codes.Internal, printer.Sprintf("unable to count groups"))
+	}
+	return int32(count), nil
 }
 
 // GetGroup gets the group with the given id from the mongo db.

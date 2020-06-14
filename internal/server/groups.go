@@ -32,41 +32,21 @@ func (srv *Server) ListGroups(ctx context.Context, req *gooserv1.ListRequest) (*
 		return nil, status.Errorf(codes.Unauthenticated, "unauthenticated")
 	}
 	printer := message.NewPrinter(language.Make(u.Language))
-	reqToken := req.GetPageToken()
 	filter := req.GetFilter()
-	size := req.GetPageSize()
-	var skip int32
-	if reqToken != "" {
-		token, err := DecodePageToken(printer, reqToken, filter)
-		if err != nil {
-			return nil, err
-		}
-		skip += token.Skip
-	}
-	groups, totalSize, err := srv.store.ListGroups(ctx, printer, filter, size, skip)
+	groups, totalSize, token, err := srv.store.ListGroups(ctx, printer, filter, "", req.GetPageToken(), req.GetPageSize())
 	if err != nil {
 		return nil, err
 	}
-	var pbGroup []*gooserv1.Group
+	var pbGroups []*gooserv1.Group
 	var pageSize int32
 	if groups != nil {
 		pageSize = int32(len(*groups))
-		for _, g := range *groups {
-			pbGroup = append(pbGroup, g.ToPb())
-		}
-	}
-	var token string
-	if totalSize > pageSize+skip {
-		token, err = EncodePageToken(printer, &PageToken{
-			Filter: filter,
-			Skip:   pageSize + skip,
-		})
-		if err != nil {
-			return nil, status.Errorf(codes.Internal, printer.Sprintf("unable to create page token: %s", err))
+		for _, m := range *groups {
+			pbGroups = append(pbGroups, m.ToPb())
 		}
 	}
 	return &gooserv1.ListGroupsResponse{
-		Groups:        pbGroup,
+		Groups:        pbGroups,
 		NextPageToken: token,
 		PageSize:      pageSize,
 		TotalSize:     totalSize,
@@ -102,14 +82,13 @@ func (srv *Server) ValidateGroup(ctx context.Context, printer *message.Printer, 
 		return status.Errorf(codes.InvalidArgument, printer.Sprintf("group name needs to have a length of at least 3"))
 	}
 	// rsql filter string for existing groups
-	filter := fmt.Sprintf(`(name=="%s")`, name)
+	filterString := fmt.Sprintf(`(name=="%s")`, name)
 	if id != "" {
-		filter = fmt.Sprintf(`(_id!oid="%s");%s`, id, filter)
+		filterString = fmt.Sprintf(`(_id!oid="%s");%s`, id, filterString)
 	}
-	_, size, err := srv.store.ListGroups(ctx, printer, filter, -1, 0)
-	if code, _ := status.FromError(err); err != nil && code.Code() != codes.NotFound {
-		srv.errorLogger.Printf("error while counting groups: %s", err)
-		return status.Errorf(codes.Internal, printer.Sprintf("error while counting groups"))
+	size, err := srv.store.CountGroups(ctx, printer, filterString)
+	if err != nil {
+		return err
 	}
 	if size > 0 {
 		return status.Errorf(codes.InvalidArgument, "name is already taken")
@@ -124,8 +103,8 @@ func (srv *Server) AddRolesToMembers(ctx context.Context, printer *message.Print
 		for _, id := range memberIds {
 			filterIds = append(filterIds, fmt.Sprintf(`"%s"`, id))
 		}
-		filter := fmt.Sprintf("_id=oid=(%s)", strings.Join(filterIds, ","))
-		members, size, err := srv.store.ListUsers(ctx, printer, filter, int32(len(memberIds)), 0)
+		filterString := fmt.Sprintf("_id=oid=(%s)", strings.Join(filterIds, ","))
+		members, size, _, err := srv.store.ListUsers(ctx, printer, filterString, "", "", int32(len(memberIds)))
 		if err != nil {
 			srv.errorLogger.Printf("unable to query members: %s", err)
 			return status.Errorf(codes.Internal, printer.Sprintf("unable to query members"))
@@ -157,11 +136,10 @@ func (srv *Server) RemoveRolesFromMembers(ctx context.Context, printer *message.
 		var user *store.User
 		for _, role := range roles {
 			// check if any other group is providing the role
-			filter := fmt.Sprintf(`_id!oid="%s";members=="%s";roles=="%s"`, groupId, userId, role)
-			_, size, err := srv.store.ListGroups(ctx, printer, filter, int32(1), 0)
-			if code, _ := status.FromError(err); err != nil && code.Code() != codes.NotFound {
-				srv.errorLogger.Printf("error while looking for groups that are providing the role %s for the user %s: %s", role, userId, err)
-				return status.Errorf(codes.Internal, printer.Sprintf("error while looking up groups"))
+			filterString := fmt.Sprintf(`_id!oid="%s";members=="%s";roles=="%s"`, groupId, userId, role)
+			size, err := srv.store.CountGroups(ctx, printer, filterString)
+			if err != nil {
+				return err
 			}
 			// no other group is providing the role
 			// if the size is 0

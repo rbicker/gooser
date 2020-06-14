@@ -93,11 +93,6 @@
             ]
         },
         {
-            "id": "the request was canceled by the client",
-            "message": "the request was canceled by the client",
-            "translation": "die Anfrage wurde vom Client abgebrochen"
-        },
-        {
             "id": "unable to count groups: {Err}",
             "message": "unable to count groups: {Err}",
             "translation": "Gruppen können nicht gezählt werden: {Err}",
@@ -697,6 +692,134 @@
                     "expr": "err"
                 }
             ]
+        },
+        {
+            "id": "internal error while building filter",
+            "message": "internal error while building filter",
+            "translation": "Interner Fehler beim Erstellen des Filters"
+        },
+        {
+            "id": "orderBy field has a length of 0",
+            "message": "orderBy field has a length of 0",
+            "translation": "Sortierfeld hat eine Länge von 0"
+        },
+        {
+            "id": "unable to search next document while creating pagination token",
+            "message": "unable to search next document while creating pagination token",
+            "translation": "während dem Erstellen des Pagination-Tokens konnte das Folgedokument nicht abgefragt werden"
+        },
+        {
+            "id": "invalid rsql filter string '{Filter}': {Err}",
+            "message": "invalid rsql filter string '{Filter}': {Err}",
+            "translation": "ungültiger rsql Filter String '{Filter}': {Err}",
+            "placeholders": [
+                {
+                    "id": "Filter",
+                    "string": "%[1]s",
+                    "type": "string",
+                    "underlyingType": "string",
+                    "argNum": 1,
+                    "expr": "filter"
+                },
+                {
+                    "id": "Err",
+                    "string": "%[2]s",
+                    "type": "error",
+                    "underlyingType": "interface{Error() string}",
+                    "argNum": 2,
+                    "expr": "err"
+                }
+            ]
+        },
+        {
+            "id": "{S} has a length of 0",
+            "message": "{S} has a length of 0",
+            "translation": "{S} hat eine Länge von 0",
+            "placeholders": [
+                {
+                    "id": "S",
+                    "string": "%[1]s",
+                    "type": "string",
+                    "underlyingType": "string",
+                    "argNum": 1,
+                    "expr": "s"
+                }
+            ]
+        },
+        {
+            "id": "invalid page token given",
+            "message": "invalid page token given",
+            "translation": "Ungültiger Pagination Token erhalten"
+        },
+        {
+            "id": "pagination filter and given filters do not match",
+            "message": "pagination filter and given filters do not match",
+            "translation": "Pagination Filter und gegebener Filter stimmen nicht überein"
+        },
+        {
+            "id": "pagination orderBy and given orderBy do not match",
+            "message": "pagination orderBy and given orderBy do not match",
+            "translation": "Pagination Sortierung und gegebene Sortierung stimmen nicht überein"
+        },
+        {
+            "id": "the request was canceled by the client",
+            "message": "the request was canceled by the client",
+            "translation": "die Anfrage wurde vom Client abgebrochen"
+        },
+        {
+            "id": "unable to count {Name}",
+            "message": "unable to count {Name}",
+            "translation": "",
+            "placeholders": [
+                {
+                    "id": "Name",
+                    "string": "%[1]s",
+                    "type": "string",
+                    "underlyingType": "string",
+                    "argNum": 1,
+                    "expr": "collection.Name()"
+                }
+            ]
+        },
+        {
+            "id": "unable to count {Name}",
+            "message": "unable to count {Name}",
+            "translation": "Fehler beim Zählen von {Name}",
+            "placeholders": [
+                {
+                    "id": "Name",
+                    "string": "%[1]s",
+                    "type": "string",
+                    "underlyingType": "string",
+                    "argNum": 1,
+                    "expr": "collection.Name()"
+                }
+            ]
+        },
+        {
+            "id": "error while querying {Name}",
+            "message": "error while querying {Name}",
+            "translation": "Fehler beim Abfragen von {Name}",
+            "placeholders": [
+                {
+                    "id": "Name",
+                    "string": "%[1]s",
+                    "type": "string",
+                    "underlyingType": "string",
+                    "argNum": 1,
+                    "expr": "collection.Name()"
+                }
+            ]
+        },
+        {
+            "id": "unable to count groups",
+            "message": "unable to count groups",
+            "translation": "Gruppen konnten nicht gezählt werden"
+        },
+        {
+            "id": "unable to count users",
+            "message": "unable to count users",
+            "translation": "Benutzer konnten nicht gezählt werden"
         }
     ]
 }

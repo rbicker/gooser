@@ -5,8 +5,6 @@ package server
 import (
 	"context"
 	"crypto/md5"
-	"encoding/base64"
-	"encoding/json"
 	"fmt"
 	"io"
 	"log"
@@ -285,31 +283,4 @@ func EnableReflection() func(*Server) error {
 		srv.useReflection = true
 		return nil
 	}
-}
-
-// EncodePageToken encodes the given token to a base64 string.
-func EncodePageToken(printer *message.Printer, token *PageToken) (string, error) {
-	b, err := json.Marshal(token)
-	if err != nil {
-		return "", status.Errorf(codes.InvalidArgument, printer.Sprintf("unable to marshal token to json: %s", err))
-	}
-	return base64.StdEncoding.EncodeToString(b), nil
-}
-
-// DecodePageToken decodes the given base64 string to a page token.
-// The page token will be verified against the given filter.
-func DecodePageToken(printer *message.Printer, s, filter string) (*PageToken, error) {
-	b, err := base64.StdEncoding.DecodeString(s)
-	if err != nil {
-		return nil, status.Errorf(codes.InvalidArgument, "invalid page token, unable to base64 decode: %s", err)
-	}
-	var t PageToken
-	err = json.Unmarshal(b, &t)
-	if err != nil {
-		return nil, status.Errorf(codes.InvalidArgument, printer.Sprintf("invalid page token, unable to unmarshal to page token: %s", err))
-	}
-	if t.Filter != filter {
-		return nil, status.Errorf(codes.InvalidArgument, printer.Sprintf("mismatch between given filter %s and filter in page token %s", filter, t.Filter))
-	}
-	return &t, nil
 }

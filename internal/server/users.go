@@ -30,38 +30,17 @@ func (srv *Server) ListUsers(ctx context.Context, req *gooserv1.ListRequest) (*g
 		return nil, status.Errorf(codes.Unauthenticated, "unauthenticated")
 	}
 	printer := message.NewPrinter(language.Make(u.Language))
-	reqToken := req.GetPageToken()
 	filter := req.GetFilter()
-	size := req.GetPageSize()
-	var skip int32
-	if reqToken != "" {
-		token, err := DecodePageToken(printer, reqToken, filter)
-		if err != nil {
-			return nil, err
-		}
-		skip += token.Skip
-	}
-	users, totalSize, err := srv.store.ListUsers(ctx, printer, filter, size, skip)
+	users, totalSize, token, err := srv.store.ListUsers(ctx, printer, filter, "", req.GetPageToken(), req.GetPageSize())
 	if err != nil {
 		return nil, err
 	}
 	var pbUsers []*gooserv1.User
-
 	var pageSize int32
 	if users != nil {
 		pageSize = int32(len(*users))
-		for _, u := range *users {
-			pbUsers = append(pbUsers, u.ToPb())
-		}
-	}
-	var token string
-	if totalSize > pageSize+skip {
-		token, err = EncodePageToken(printer, &PageToken{
-			Filter: filter,
-			Skip:   pageSize + skip,
-		})
-		if err != nil {
-			return nil, err
+		for _, m := range *users {
+			pbUsers = append(pbUsers, m.ToPb())
 		}
 	}
 	return &gooserv1.ListUsersResponse{
@@ -114,21 +93,20 @@ func (srv *Server) ValidateUser(ctx context.Context, printer *message.Printer, u
 		return status.Errorf(codes.InvalidArgument, printer.Sprintf("could not parse given language"))
 	}
 	// rsql filter string for existing users
-	filter := fmt.Sprintf(`username=="%s"`, username)
+	filterString := fmt.Sprintf(`username=="%s"`, username)
 	if mail != "" {
 		// validate mail address
 		if !utils.IsMailAddress(mail) {
 			return status.Errorf(codes.InvalidArgument, printer.Sprintf("invalid mail address"))
 		}
-		filter = fmt.Sprintf(`%s,mail=="%s"`, filter, mail)
+		filterString = fmt.Sprintf(`%s,mail=="%s"`, filterString, mail)
 	}
 	if id != "" {
-		filter = fmt.Sprintf(`(_id!oid="%s");(%s)`, id, filter)
+		filterString = fmt.Sprintf(`(_id!oid="%s");(%s)`, id, filterString)
 	}
-	_, size, err := srv.store.ListUsers(ctx, printer, filter, 1, 0)
-	if code, _ := status.FromError(err); err != nil && code.Code() != codes.NotFound {
-		srv.errorLogger.Printf("error while counting users: %s", err)
-		return status.Errorf(codes.Internal, printer.Sprintf("error while counting users"))
+	size, err := srv.store.CountUsers(ctx, printer, filterString)
+	if err != nil {
+		return err
 	}
 	if size > 0 {
 		return status.Errorf(codes.InvalidArgument, "username or mail address is already taken")
@@ -295,7 +273,7 @@ func (srv *Server) DeleteUser(ctx context.Context, req *gooserv1.IdRequest) (*em
 		return nil, status.Errorf(codes.InvalidArgument, "empty id given")
 	}
 	filter := fmt.Sprintf(`members=="%s"`, id)
-	groups, _, err := srv.store.ListGroups(ctx, printer, filter, -1, 0)
+	groups, _, _, err := srv.store.ListGroups(ctx, printer, filter, "", "", -1)
 	for _, g := range *groups {
 		g.Members = utils.RemoveFromStringSlice(g.Members, id)
 		_, err := srv.store.SaveGroup(ctx, printer, &g)
