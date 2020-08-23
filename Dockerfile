@@ -1,6 +1,6 @@
 # builder
 FROM golang:alpine AS builder
-RUN apk update && apk add --no-cache git
+RUN apk update && apk add --no-cache git tzdata ca-certificates
 ENV USER=app
 ENV UID=10001
 RUN adduser \
@@ -26,6 +26,10 @@ FROM scratch
 ENV PORT=50051
 COPY --from=builder /etc/passwd /etc/passwd
 COPY --from=builder /etc/group /etc/group
+# for working with timezones
+COPY --from=builder /usr/share/zoneinfo  /usr/share/zoneinfo
+# to have valid ca certs
+COPY --from=builder /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/
 COPY --from=builder /go/bin/gooser-server /gooser-server
 USER app:app
 # EXPOSE 50051
