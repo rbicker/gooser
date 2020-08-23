@@ -4,7 +4,7 @@
         {
             "id": "{SiteName}: confirm mail address",
             "message": "{SiteName}: confirm mail address",
-            "translation": "{SiteName}: Mail-Adresse bestätigen",
+            "translation": "{SiteName}: Mail-Adresse bescheinigen",
             "placeholders": [
                 {
                     "id": "SiteName",
